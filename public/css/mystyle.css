@@ -1,0 +1,85 @@
+.container {
+    margin-top:20px;
+}
+.container-fluid{
+    padding: 0px;
+}
+/* .list-group {
+    list-style: decimal inside !important
+} */
+
+.list-group-item {
+    display: list-item !important
+}
+.form_custom{
+    background: whitesmoke;
+
+}
+.required_filled_small{
+    color: red;
+}
+.border_right{
+    border-right:2px dotted;
+    border-color: black;
+}
+.list_title{
+    color: black;
+    font-weight: 700;
+}
+
+.boxradio label{
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    margin: 0px;
+}
+.boxradio label input{
+    display: none;
+}
+.boxradio label span{
+    font-size: 14px;
+    font-weight: bold;
+}
+.boxradio label:hover{
+    font-size: 14px;
+    font-weight: bold;
+    background: #E06C75;
+}
+
+.boxradio label input:checked ~ span{
+    background: #E06C75;
+    color: #000;
+    border: 1px solid #008eff;
+}
+
+.tabContainer{
+    width: 100%;
+    height: 350px;
+}
+.tabContainer .buttonContainer{
+    height: 15%;
+}
+.tabContainer .buttonContainer button{
+    width: 25%;
+    height: 100%;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #eee;
+}
+.tabContainer .buttonContainer button:hover{
+    background-color: #d7d4d4;
+}
+.tabContainer .tabPanel{
+    height: 85%;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    padding-top: 105px;
+    box-sizing: border-box;
+    font-size: 22px;
+    display: none;
+}

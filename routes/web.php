@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index')->name('index');
+
+Route::get('/createcategory', 'CategoryController@create')->name('createcategory');
+Route::post('/createcategory', 'CategoryController@store')->name('createcategory.store');
+Route::get('/categorylist', 'CategoryController@index')->name('categorylist');
+Route::get('/categoryarc', 'CategoryController@indexarc')->name('categoryarc');
+Route::get('/categoryedit/{id}', 'CategoryController@edit')->name('categoryedit');
+Route::post('/categoryedit/{id}', 'CategoryController@update')->name('categoryedit.update');
+Route::post('/categorydelete/{id}', 'CategoryController@delete')->name('categorydelete');
+Route::post('/categorydestroy/{id}', 'CategoryController@destroy')->name('categorydestroy');
+Route::post('/categoryactive/{id}', 'CategoryController@active')->name('categoryactive');
