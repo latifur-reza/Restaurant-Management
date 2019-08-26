@@ -55,13 +55,13 @@
             <div class="collapse" id="Menu">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./menunew.php">Menu</a>
+                  <a class="nav-link" href="{{ route('createmenu') }}">Add Menu</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./menulist.php">Menu List</a>
+                  <a class="nav-link" href="{{ route('menulist') }}">Menu List</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./menulistarc.php">Menu Archive</a>
+                  <a class="nav-link" href="{{ route('menuarc') }}">Menu Archive</a>
                 </li>
 
               </ul>

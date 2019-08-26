@@ -13,6 +13,7 @@
 
 Route::get('/', 'PagesController@index')->name('index');
 
+//category routes
 Route::get('/createcategory', 'CategoryController@create')->name('createcategory');
 Route::post('/createcategory', 'CategoryController@store')->name('createcategory.store');
 Route::get('/categorylist', 'CategoryController@index')->name('categorylist');
@@ -22,3 +23,14 @@ Route::post('/categoryedit/{id}', 'CategoryController@update')->name('categoryed
 Route::post('/categorydelete/{id}', 'CategoryController@delete')->name('categorydelete');
 Route::post('/categorydestroy/{id}', 'CategoryController@destroy')->name('categorydestroy');
 Route::post('/categoryactive/{id}', 'CategoryController@active')->name('categoryactive');
+
+//menu route
+Route::get('/createmenu', 'MenuController@create')->name('createmenu');
+Route::post('/createmenu', 'MenuController@store')->name('createmenu.store');
+Route::get('/menulist', 'MenuController@index')->name('menulist');
+Route::get('/menuarc', 'MenuController@indexarc')->name('menuarc');
+Route::get('/menuedit/{id}', 'MenuController@edit')->name('menuedit');
+Route::post('/menuedit/{id}', 'MenuController@update')->name('menuedit.update');
+Route::post('/menudelete/{id}', 'MenuController@delete')->name('menudelete');
+Route::post('/menudestroy/{id}', 'MenuController@destroy')->name('menudestroy');
+Route::post('/menuactive/{id}', 'MenuController@active')->name('menuactive');
