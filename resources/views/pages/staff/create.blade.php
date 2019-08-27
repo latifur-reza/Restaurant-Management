@@ -11,7 +11,7 @@
           </div>
           <div class="form-group">
             <label for="name" class="text-center"> <b>Name : </b><span style="color: red">*</span> </label>
-            <input type="text" class="form-control" placeholder="Example: Mr. Staff" name="name" required>
+            <input type="text" class="form-control" placeholder="Example: Mr. Staff" name="name" autofocus required>
           </div>
           <div class="form-group">
             <label for="email" class="text-center"> <b>Email :</b> </label>

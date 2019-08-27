@@ -10,7 +10,7 @@
           </div>
           <div class="form-group">
             <label for="categoryname" class="text-center"> <b>Category Name : </b><span style="color: red">*</span></label>
-            <input type="text" class="form-control" placeholder="{{$category->categoryname}}" value="{{$category->categoryname}}" name="categoryname" required>
+            <input type="text" class="form-control" placeholder="{{$category->categoryname}}" value="{{$category->categoryname}}" name="categoryname" autofocus required>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary" name="updatecategory">UPDATE NOW</button>

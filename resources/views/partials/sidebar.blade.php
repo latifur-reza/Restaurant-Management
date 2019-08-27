@@ -77,13 +77,13 @@
             <div class="collapse" id="Barcode">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Add Barcode</a>
+                  <a class="nav-link" href="{{ route('createbarcode') }}">Add Barcode</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Barcode List</a>
+                  <a class="nav-link" href="{{ route('barcodelist') }}">Barcode List</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Barcode Archive</a>
+                  <a class="nav-link" href="{{ route('barcodearc') }}">Barcode Archive</a>
                 </li>
 
               </ul>

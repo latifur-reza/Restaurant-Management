@@ -45,3 +45,14 @@ Route::post('/staffedit/{id}', 'StaffController@update')->name('staffedit.update
 Route::post('/staffdelete/{id}', 'StaffController@delete')->name('staffdelete');
 Route::post('/staffdestroy/{id}', 'StaffController@destroy')->name('staffdestroy');
 Route::post('/staffactive/{id}', 'StaffController@active')->name('staffactive');
+
+//barcode route
+Route::get('/createbarcode', 'BarcodeController@create')->name('createbarcode');
+Route::post('/createbarcode', 'BarcodeController@store')->name('createbarcode.store');
+Route::get('/barcodelist', 'BarcodeController@index')->name('barcodelist');
+Route::get('/barcodearc', 'BarcodeController@indexarc')->name('barcodearc');
+Route::get('/barcodeedit/{id}', 'BarcodeController@edit')->name('barcodeedit');
+Route::post('/barcodeedit/{id}', 'BarcodeController@update')->name('barcodeedit.update');
+Route::post('/barcodedelete/{id}', 'BarcodeController@delete')->name('barcodedelete');
+Route::post('/barcodedestroy/{id}', 'BarcodeController@destroy')->name('barcodedestroy');
+Route::post('/barcodeactive/{id}', 'BarcodeController@active')->name('barcodeactive');
