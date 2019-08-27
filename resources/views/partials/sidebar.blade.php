@@ -143,13 +143,13 @@
             <div class="collapse" id="Staff">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./staffadd.php">Add Staff</a>
+                  <a class="nav-link" href="{{ route('createstaff') }}">Add Staff</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./stafflist.php">Staff List</a>
+                  <a class="nav-link" href="{{ route('stafflist') }}">Staff List</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./stafflistarc.php">Staff Archive</a>
+                  <a class="nav-link" href="{{ route('staffarc') }}">Staff Archive</a>
                 </li>
 
               </ul>
