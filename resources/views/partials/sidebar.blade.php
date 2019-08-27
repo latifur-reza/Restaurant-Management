@@ -99,13 +99,13 @@
             <div class="collapse" id="Customer">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./customeradd.php">Add Customer</a>
+                  <a class="nav-link" href="{{ route('createcustomer') }}">Add Customer</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./customerlist.php">Customer List</a>
+                  <a class="nav-link" href="{{ route('customerlist') }}">Customer List</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./customerlistarc.php">Customer Archive</a>
+                  <a class="nav-link" href="{{ route('customerarc') }}">Customer Archive</a>
                 </li>
 
               </ul>

@@ -56,3 +56,14 @@ Route::post('/barcodeedit/{id}', 'BarcodeController@update')->name('barcodeedit.
 Route::post('/barcodedelete/{id}', 'BarcodeController@delete')->name('barcodedelete');
 Route::post('/barcodedestroy/{id}', 'BarcodeController@destroy')->name('barcodedestroy');
 Route::post('/barcodeactive/{id}', 'BarcodeController@active')->name('barcodeactive');
+
+//customer route
+Route::get('/createcustomer', 'CustomerController@create')->name('createcustomer');
+Route::post('/createcustomer', 'CustomerController@store')->name('createcustomer.store');
+Route::get('/customerlist', 'CustomerController@index')->name('customerlist');
+Route::get('/customerarc', 'CustomerController@indexarc')->name('customerarc');
+Route::get('/customeredit/{id}', 'CustomerController@edit')->name('customeredit');
+Route::post('/customeredit/{id}', 'CustomerController@update')->name('customeredit.update');
+Route::post('/customerdelete/{id}', 'CustomerController@delete')->name('customerdelete');
+Route::post('/customerdestroy/{id}', 'CustomerController@destroy')->name('customerdestroy');
+Route::post('/customeractive/{id}', 'CustomerController@active')->name('customeractive');

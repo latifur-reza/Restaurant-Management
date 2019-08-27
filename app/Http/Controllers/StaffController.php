@@ -42,6 +42,16 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
+      $request->validate([
+        'name' => 'required|max:150',
+        'email' => 'nullable',
+        'phone' => 'nullable',
+        'address' => 'nullable',
+        'salary' => 'numeric|nullable',
+        'joiningdate' => 'nullable',
+
+      ]);
+
       $staff = new Staff;
 
       $staff->name = $request->name;
@@ -91,6 +101,16 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $request->validate([
+        'name' => 'required|max:150',
+        'email' => 'nullable',
+        'phone' => 'nullable',
+        'address' => 'nullable',
+        'salary' => 'numeric|nullable',
+        'joiningdate' => 'nullable',
+
+      ]);
+      
       $staff = Staff::find($id);
 
       $staff->name = $request->name;
@@ -109,7 +129,7 @@ class StaffController extends Controller
       } else {
         return redirect()->route('staffarc');
       }
-      
+
     }
 
     /**

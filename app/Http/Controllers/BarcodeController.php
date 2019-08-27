@@ -42,6 +42,11 @@ class BarcodeController extends Controller
      */
     public function store(Request $request)
     {
+      $request->validate([
+        'code' => 'unique:barcodes|required|max:150',
+
+      ]);
+
       $barcode = new Barcode;
 
       $barcode->code = $request->code;
@@ -86,6 +91,11 @@ class BarcodeController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $request->validate([
+        'code' => 'unique:barcodes|required|max:150',
+
+      ]);
+
       $barcode = Barcode::find($id);
 
       $barcode->code = $request->code;

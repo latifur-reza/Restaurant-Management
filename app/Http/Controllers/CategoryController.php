@@ -43,6 +43,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+      $request->validate([
+        'categoryname' => 'unique:categories|required|max:150',
+
+      ]);
         $category = new Category;
 
         $category->categoryname = $request->categoryname;
@@ -88,6 +92,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $request->validate([
+        'categoryname' => 'unique:categories|required|max:150',
+
+      ]);
       $category = Category::find($id);
 
       $category->categoryname = $request->categoryname;
@@ -100,7 +108,7 @@ class CategoryController extends Controller
       } else {
         return redirect()->route('categoryarc');
       }
-      
+
     }
 
     /**

@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('content')
+  @include('partials.messages')
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 form_custom">
