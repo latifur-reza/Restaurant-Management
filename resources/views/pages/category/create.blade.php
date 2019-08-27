@@ -8,7 +8,9 @@
           @csrf
           <div class="form-group">
             <h5 class="text-center"><b>Add New Category</b> </h5>
-            <label for="categoryname" class="text-center"> <b>Category Name </b><span style="color: red">*</span> </label>
+          </div>
+          <div class="form-group">
+            <label for="categoryname" class="text-center"> <b>Category Name : </b><span style="color: red">*</span> </label>
             <input type="text" class="form-control" placeholder="Example:Burger" name="categoryname" required>
           </div>
           <div class="text-center">

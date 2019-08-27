@@ -104,7 +104,12 @@ class StaffController extends Controller
 
       $staff->save();
       session()->flash('success','Staff has updated successfully!!');
-      return redirect()->route('stafflist');
+      if ($staff->status == "Active") {
+        return redirect()->route('stafflist');
+      } else {
+        return redirect()->route('staffarc');
+      }
+      
     }
 
     /**

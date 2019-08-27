@@ -15,13 +15,13 @@ class MenuController extends Controller
      */
      public function index()
      {
-         $menu = Menu::orderBy('categoryname','asc')->where('status','Active')->get();
+         $menu = Menu::orderBy('categoryname','asc')->orderBy('food','asc')->where('status','Active')->get();
          return view('pages.menu.list')->with('menu',$menu);
      }
 
      public function indexarc()
      {
-         $menu = Menu::orderBy('categoryname','asc')->where('status','Deleted')->get();
+         $menu = Menu::orderBy('categoryname','asc')->orderBy('food','asc')->where('status','Deleted')->get();
          return view('pages.menu.listarc')->with('menu',$menu);
      }
 
@@ -134,7 +134,12 @@ class MenuController extends Controller
 
       $menu->save();
       session()->flash('success','Menu has updated successfully!!');
-      return redirect()->route('menulist');
+      if ($menu->status == "Active") {
+        return redirect()->route('menulist');
+      } else {
+        return redirect()->route('menuarc');
+      }
+      
     }
 
     /**

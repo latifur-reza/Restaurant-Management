@@ -95,7 +95,12 @@ class CategoryController extends Controller
 
       $category->save();
       session()->flash('success','Category has updated successfully!!');
-      return redirect()->route('categorylist');
+      if ($category->status == "Active") {
+        return redirect()->route('categorylist');
+      } else {
+        return redirect()->route('categoryarc');
+      }
+      
     }
 
     /**

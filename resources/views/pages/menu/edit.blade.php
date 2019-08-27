@@ -20,19 +20,19 @@
 
           <div class="form-group">
             <label for="foodname" class="text-center"><b>Food Name : </b><span style="color: red">*</span></label>
-            <input type="text" class="form-control" placeholder="Example: BBQ Cheese Burger" name="food" value="{{$menu->food}}" required>
+            <input type="text" class="form-control" placeholder="{{$menu->food}}" name="food" value="{{$menu->food}}" required>
           </div>
           <div class="form-group">
             <label for="price" class="text-center"> <b>Price : </b><span style="color: red">*</span></label>
-            <input type="number" class="form-control" placeholder="Example: 220" name="price" value="{{$menu->price}}" required>
+            <input type="number" class="form-control" placeholder="{{$menu->price}}" name="price" value="{{$menu->price}}" required>
           </div>
           <div class="form-group">
             <label for="discountcash" class="text-center"> <b>Discount <i>Percentage (%)</i> :</b> </label>
-            <input type="number" class="form-control" placeholder="Example: 20%" name="discountpercent" value="{{$menu->discountpercent}}">
+            <input type="number" class="form-control" placeholder="{{$menu->discountpercent}}" name="discountpercent" value="{{$menu->discountpercent}}">
           </div>
           <div class="form-group">
             <label for="discountcash" class="text-center"> <b>Discount <i>Fixed</i> :</b> </label>
-            <input type="number" class="form-control" placeholder="Example: 30" name="discountcash" value="{{$menu->discountcash}}">
+            <input type="number" class="form-control" placeholder="{{$menu->discountcash}}" name="discountcash" value="{{$menu->discountcash}}">
           </div>
 
           <div class="text-center">
