@@ -165,10 +165,13 @@
             <div class="collapse" id="Banking">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./">New Transaction</a>
+                  <a class="nav-link" href="{{ route('createbanking') }}">New Transaction</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Transaction List</a>
+                  <a class="nav-link" href="{{ route('bankinglist') }}">Transaction List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('bankingarc') }}">Transaction Archive</a>
                 </li>
 
               </ul>

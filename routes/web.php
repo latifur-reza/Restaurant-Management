@@ -67,3 +67,12 @@ Route::post('/customeredit/{id}', 'CustomerController@update')->name('customered
 Route::post('/customerdelete/{id}', 'CustomerController@delete')->name('customerdelete');
 Route::post('/customerdestroy/{id}', 'CustomerController@destroy')->name('customerdestroy');
 Route::post('/customeractive/{id}', 'CustomerController@active')->name('customeractive');
+
+//banking route
+Route::get('/createbanking', 'BankingController@create')->name('createbanking');
+Route::post('/createbanking', 'BankingController@store')->name('createbanking.store');
+Route::get('/bankinglist', 'BankingController@index')->name('bankinglist');
+Route::get('/bankingarc', 'BankingController@indexarc')->name('bankingarc');
+Route::post('/bankingdelete/{id}', 'BankingController@delete')->name('bankingdelete');
+Route::post('/bankingdestroy/{id}', 'BankingController@destroy')->name('bankingdestroy');
+Route::post('/bankingactive/{id}', 'BankingController@active')->name('bankingactive');

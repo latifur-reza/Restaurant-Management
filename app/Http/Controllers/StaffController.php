@@ -110,7 +110,7 @@ class StaffController extends Controller
         'joiningdate' => 'nullable',
 
       ]);
-      
+
       $staff = Staff::find($id);
 
       $staff->name = $request->name;
@@ -174,7 +174,7 @@ class StaffController extends Controller
      * @param  \App\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy($id)
     {
       $staff = Staff::find($id);
       if (!is_null($staff)) {
