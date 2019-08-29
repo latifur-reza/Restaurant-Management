@@ -209,7 +209,13 @@
             <div class="collapse" id="dailyexpenses">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Add Category</a>
+                  <a class="nav-link" href="{{ route('createdailyexpensescategory') }}">Add Category</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('dailyexpensescategorylist') }}">Category List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('dailyexpensescategoryarc') }}">Category Archive</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="./">Expense Now</a>

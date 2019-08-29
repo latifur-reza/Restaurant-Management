@@ -76,3 +76,15 @@ Route::get('/bankingarc', 'BankingController@indexarc')->name('bankingarc');
 Route::post('/bankingdelete/{id}', 'BankingController@delete')->name('bankingdelete');
 Route::post('/bankingdestroy/{id}', 'BankingController@destroy')->name('bankingdestroy');
 Route::post('/bankingactive/{id}', 'BankingController@active')->name('bankingactive');
+
+
+//dailyexpensescategory route
+Route::get('/createdailyexpensescategory', 'DailyExpensesCategoryController@create')->name('createdailyexpensescategory');
+Route::post('/createdailyexpensescategory', 'DailyExpensesCategoryController@store')->name('createdailyexpensescategory.store');
+Route::get('/dailyexpensescategorylist', 'DailyExpensesCategoryController@index')->name('dailyexpensescategorylist');
+Route::get('/dailyexpensescategoryarc', 'DailyExpensesCategoryController@indexarc')->name('dailyexpensescategoryarc');
+Route::get('/dailyexpensescategoryedit/{id}', 'DailyExpensesCategoryController@edit')->name('dailyexpensescategoryedit');
+Route::post('/dailyexpensescategoryedit/{id}', 'DailyExpensesCategoryController@update')->name('dailyexpensescategoryedit.update');
+Route::post('/dailyexpensescategorydelete/{id}', 'DailyExpensesCategoryController@delete')->name('dailyexpensescategorydelete');
+Route::post('/dailyexpensescategorydestroy/{id}', 'DailyExpensesCategoryController@destroy')->name('dailyexpensescategorydestroy');
+Route::post('/dailyexpensescategoryactive/{id}', 'DailyExpensesCategoryController@active')->name('dailyexpensescategoryactive');
