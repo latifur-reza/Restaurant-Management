@@ -88,3 +88,12 @@ Route::post('/dailyexpensescategoryedit/{id}', 'DailyExpensesCategoryController@
 Route::post('/dailyexpensescategorydelete/{id}', 'DailyExpensesCategoryController@delete')->name('dailyexpensescategorydelete');
 Route::post('/dailyexpensescategorydestroy/{id}', 'DailyExpensesCategoryController@destroy')->name('dailyexpensescategorydestroy');
 Route::post('/dailyexpensescategoryactive/{id}', 'DailyExpensesCategoryController@active')->name('dailyexpensescategoryactive');
+
+//dailyexpenses route
+Route::get('/createdailyexpensesnow', 'DailyExpensesController@create')->name('createdailyexpenses');
+Route::post('/createdailyexpensesnow', 'DailyExpensesController@store')->name('createdailyexpenses.store');
+Route::get('/dailyexpenseslist', 'DailyExpensesController@index')->name('dailyexpenseslist');
+Route::get('/dailyexpensesarc', 'DailyExpensesController@indexarc')->name('dailyexpensesarc');
+Route::post('/dailyexpensesdelete/{id}', 'DailyExpensesController@delete')->name('dailyexpensesdelete');
+Route::post('/dailyexpensesdestroy/{id}', 'DailyExpensesController@destroy')->name('dailyexpensesdestroy');
+Route::post('/dailyexpensesactive/{id}', 'DailyExpensesController@active')->name('dailyexpensesactive');

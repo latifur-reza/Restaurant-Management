@@ -218,13 +218,13 @@
                   <a class="nav-link" href="{{ route('dailyexpensescategoryarc') }}">Category Archive</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Expense Now</a>
+                  <a class="nav-link" href="{{ route('createdailyexpenses') }}">Expense Now</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Expense List</a>
+                  <a class="nav-link" href="{{ route('dailyexpenseslist') }}">Expense List</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Expense Archive</a>
+                  <a class="nav-link" href="{{ route('dailyexpensesarc') }}">Expense Archive</a>
                 </li>
 
               </ul>
