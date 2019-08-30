@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\dailyExpensesCategory;
+use App\DailyExpensesCategory;
 use Illuminate\Http\Request;
 
 class DailyExpensesCategoryController extends Controller
@@ -61,10 +61,10 @@ class DailyExpensesCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\dailyExpensesCategory  $dailyExpensesCategory
+     * @param  \App\DailyExpensesCategory  $DailyExpensesCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(dailyExpensesCategory $dailyExpensesCategory)
+    public function show(DailyExpensesCategory $DailyExpensesCategory)
     {
         //
     }
@@ -72,7 +72,7 @@ class DailyExpensesCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\dailyExpensesCategory  $dailyExpensesCategory
+     * @param  \App\DailyExpensesCategory  $DailyExpensesCategory
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,7 +85,7 @@ class DailyExpensesCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\dailyExpensesCategory  $dailyExpensesCategory
+     * @param  \App\DailyExpensesCategory  $DailyExpensesCategory
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -147,7 +147,7 @@ class DailyExpensesCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\dailyExpensesCategory  $dailyExpensesCategory
+     * @param  \App\DailyExpensesCategory  $DailyExpensesCategory
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

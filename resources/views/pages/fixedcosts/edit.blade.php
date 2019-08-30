@@ -15,7 +15,7 @@
           </div>
           <div class="form-group">
             <label for="amount" class="text-center"> <b>Amount : </b><span style="color: red">*</span></label>
-            <input type="text" class="form-control" placeholder="{{$fixedcosts->amount}}" value="{{$fixedcosts->amount}}" name="amount" required>
+            <input type="number" class="form-control" placeholder="{{$fixedcosts->amount}}" value="{{$fixedcosts->amount}}" name="amount" required>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary" name="updatefixedcosts">UPDATE NOW</button>

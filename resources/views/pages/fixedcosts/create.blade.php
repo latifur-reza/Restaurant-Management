@@ -15,7 +15,7 @@
           </div>
           <div class="form-group">
             <label for="amount" class="text-center"> <b>Amount : </b><span style="color: red">*</span> </label>
-            <input type="text" class="form-control" placeholder="Example: 20000" name="amount" required>
+            <input type="number" class="form-control" placeholder="Example: 20000" name="amount" required>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary" name="createfixedcosts">ADD NOW</button>
