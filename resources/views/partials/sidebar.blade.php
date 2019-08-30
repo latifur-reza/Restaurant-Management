@@ -195,6 +195,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('fixedcostsarc') }}">Fixed Expense Archive</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('fixedcostsexpenseslist') }}">Expense List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('fixedcostsexpensesarc') }}">Expense Archive</a>
+                </li>
 
               </ul>
             </div>

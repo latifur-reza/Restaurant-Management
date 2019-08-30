@@ -2,7 +2,7 @@
 @section('content')
   @include('partials.messages')
   <div class="container-fluid ">
-    <h1 class="text-center" style="color: black">Fixed Costs List</h1>
+    <h1 class="text-center" style="color: black">Fixed Expenses List</h1>
   </div>
   <div class="container-fluid table-responsive">
     <table class="table" id="mydatatable1">
@@ -11,6 +11,8 @@
           <th>Sl No.</th>
           <th>Costing</th>
           <th>Amount</th>
+          <th>Done By</th>
+          <th>Ext</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -18,14 +20,14 @@
         @php
           $count = 1;
         @endphp
-        @foreach ($fixedcosts as $item)
+        @foreach ($fixedcostsexpenses as $item)
           <tr>
             <td>{{$count++}}</td>
             <td>{{$item->reason}}</td>
             <td>{{$item->amount}}</td>
+            <td>{{$item->doneby}}</td>
+            <td>{{$item->ext}}</td>
             <td>
-              <a href="{{ route('createfixedcostsexpenses',$item->id) }}"><button type="button" value="edit" class="btn btn-success">Expense Now</button></a>
-              <a href="{{ route('fixedcostsedit',$item->id) }}"><button type="button" value="edit" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
               <a href="#delete{{$item->id}}" data-toggle="modal"><button type="button" value="delete" class="btn btn-danger"><i class="fa fa-remove"></i></button></a>
 
               <!-- Modal -->
@@ -43,7 +45,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <form class="" action="{!! route('fixedcostsdelete',$item->id) !!}" method="post" enctype="multipart/form-data">
+                      <form class="" action="{!! route('fixedcostsexpensesdelete',$item->id) !!}" method="post" enctype="multipart/form-data">
                         @csrf
                         <button type="submit" class="btn btn-danger">Delete</button>
                       </form>
