@@ -187,13 +187,13 @@
             <div class="collapse" id="fixedcosts">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Add Costing</a>
+                  <a class="nav-link" href="{{ route('createfixedcosts') }}">Add Costing</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Fixed Expense Reason</a>
+                  <a class="nav-link" href="{{ route('fixedcostslist') }}">Fixed Expense Reason</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Expense List</a>
+                  <a class="nav-link" href="{{ route('fixedcostsarc') }}">Fixed Expense Archive</a>
                 </li>
 
               </ul>

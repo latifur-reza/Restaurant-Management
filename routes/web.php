@@ -97,3 +97,14 @@ Route::get('/dailyexpensesarc', 'DailyExpensesController@indexarc')->name('daily
 Route::post('/dailyexpensesdelete/{id}', 'DailyExpensesController@delete')->name('dailyexpensesdelete');
 Route::post('/dailyexpensesdestroy/{id}', 'DailyExpensesController@destroy')->name('dailyexpensesdestroy');
 Route::post('/dailyexpensesactive/{id}', 'DailyExpensesController@active')->name('dailyexpensesactive');
+
+//fixedcosts routes
+Route::get('/createfixedcosts', 'FixedCostsController@create')->name('createfixedcosts');
+Route::post('/createfixedcosts', 'FixedCostsController@store')->name('createfixedcosts.store');
+Route::get('/fixedcostslist', 'FixedCostsController@index')->name('fixedcostslist');
+Route::get('/fixedcostsarc', 'FixedCostsController@indexarc')->name('fixedcostsarc');
+Route::get('/fixedcostsedit/{id}', 'FixedCostsController@edit')->name('fixedcostsedit');
+Route::post('/fixedcostsedit/{id}', 'FixedCostsController@update')->name('fixedcostsedit.update');
+Route::post('/fixedcostsdelete/{id}', 'FixedCostsController@delete')->name('fixedcostsdelete');
+Route::post('/fixedcostsdestroy/{id}', 'FixedCostsController@destroy')->name('fixedcostsdestroy');
+Route::post('/fixedcostsactive/{id}', 'FixedCostsController@active')->name('fixedcostsactive');
