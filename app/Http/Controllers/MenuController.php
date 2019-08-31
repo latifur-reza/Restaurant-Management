@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Category;
 use Illuminate\Http\Request;
+use Auth;
 
 class MenuController extends Controller
 {
@@ -67,8 +68,8 @@ class MenuController extends Controller
         $menu->discountcash = 0;
       }
       $menu->status = "Active";
-      $menu->createdby = "1";
-      $menu->updatedby = "1";
+      $menu->createdby = Auth::user()->id;
+      $menu->updatedby = Auth::user()->id;
 
       $menu->save();
       session()->flash('success','Menu has created successfully!!');
@@ -130,7 +131,7 @@ class MenuController extends Controller
       if (is_null($menu->discountcash)) {
         $menu->discountcash = 0;
       }
-      $menu->updatedby = "1";
+      $menu->updatedby = Auth::user()->id;
 
       $menu->save();
       session()->flash('success','Menu has updated successfully!!');
@@ -139,7 +140,7 @@ class MenuController extends Controller
       } else {
         return redirect()->route('menuarc');
       }
-      
+
     }
 
     /**
@@ -153,7 +154,7 @@ class MenuController extends Controller
        $menu = Menu::find($id);
 
        $menu->status = "Deleted";
-       $menu->updatedby = "1";
+       $menu->updatedby = Auth::user()->id;
 
        $menu->save();
        session()->flash('success','Menu has deleted successfully!!');
@@ -171,7 +172,7 @@ class MenuController extends Controller
         $menu = Menu::find($id);
 
         $menu->status = "Active";
-        $menu->updatedby = "1";
+        $menu->updatedby = Auth::user()->id;
 
         $menu->save();
         session()->flash('success','Menu has activated successfully!!');

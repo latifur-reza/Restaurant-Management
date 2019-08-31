@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DailyExpenses;
 use App\DailyExpensesCategory;
 use Illuminate\Http\Request;
+use Auth;
 
 class DailyExpensesController extends Controller
 {
@@ -62,8 +63,8 @@ class DailyExpensesController extends Controller
       $dailyexpenses->doneby = $request->doneby;
 
       $dailyexpenses->status = "Active";
-      $dailyexpenses->createdby = "1";
-      $dailyexpenses->updatedby = "1";
+      $dailyexpenses->createdby = Auth::user()->id;
+      $dailyexpenses->updatedby = Auth::user()->id;
 
       $dailyexpenses->save();
       session()->flash('success','Expenses has added successfully!!');
@@ -115,7 +116,7 @@ class DailyExpensesController extends Controller
        $dailyexpenses = DailyExpenses::find($id);
 
        $dailyexpenses->status = "Deleted";
-       $dailyexpenses->updatedby = "1";
+       $dailyexpenses->updatedby = Auth::user()->id;
 
        $dailyexpenses->save();
        session()->flash('success','Expense has deleted successfully!!');
@@ -133,7 +134,7 @@ class DailyExpensesController extends Controller
         $dailyexpenses = DailyExpenses::find($id);
 
         $dailyexpenses->status = "Active";
-        $dailyexpenses->updatedby = "1";
+        $dailyexpenses->updatedby = Auth::user()->id;
 
         $dailyexpenses->save();
         session()->flash('success','Expense has activated successfully!!');

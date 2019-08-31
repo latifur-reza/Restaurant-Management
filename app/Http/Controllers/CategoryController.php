@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -51,8 +52,8 @@ class CategoryController extends Controller
 
         $category->categoryname = $request->categoryname;
         $category->status = "Active";
-        $category->createdby = "1";
-        $category->updatedby = "1";
+        $category->createdby = Auth::user()->id;
+        $category->updatedby = Auth::user()->id;
 
         $category->save();
         session()->flash('success','Category has created successfully!!');
@@ -99,7 +100,7 @@ class CategoryController extends Controller
       $category = Category::find($id);
 
       $category->categoryname = $request->categoryname;
-      $category->updatedby = "1";
+      $category->updatedby = Auth::user()->id;
 
       $category->save();
       session()->flash('success','Category has updated successfully!!');
@@ -122,7 +123,7 @@ class CategoryController extends Controller
        $category = Category::find($id);
 
        $category->status = "Deleted";
-       $category->updatedby = "1";
+       $category->updatedby = Auth::user()->id;
 
        $category->save();
        session()->flash('success','Category has deleted successfully!!');
@@ -140,7 +141,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         $category->status = "Active";
-        $category->updatedby = "1";
+        $category->updatedby = Auth::user()->id;
 
         $category->save();
         session()->flash('success','Category has activated successfully!!');

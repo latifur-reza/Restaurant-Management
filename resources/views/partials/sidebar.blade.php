@@ -130,13 +130,10 @@
                 <div class="collapse" id="Manager">
                   <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                      <a class="nav-link" href="./manageradd.php">Add Manager</a>
+                      <a class="nav-link" href="{{ route('createmanager') }}">Add Manager</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="./managerlist.php">Manager List</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="./managerlistarc.php">Manager Archive</a>
+                      <a class="nav-link" href="{{ route('managerlist') }}">Manager List</a>
                     </li>
 
                   </ul>

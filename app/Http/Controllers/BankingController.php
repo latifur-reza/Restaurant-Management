@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Banking;
+use Auth;
 use Illuminate\Http\Request;
 
 class BankingController extends Controller
@@ -56,8 +57,8 @@ class BankingController extends Controller
         $banking->doneby = $request->doneby;
         $banking->ext = $request->ext;
         $banking->status = "Active";
-        $banking->createdby = "1";
-        $banking->updatedby = "1";
+        $banking->createdby = Auth::user()->id;
+        $banking->updatedby = Auth::user()->id;
 
         $banking->save();
         session()->flash('success','Transaction has done successfully!!');
@@ -109,7 +110,7 @@ class BankingController extends Controller
        $banking = Banking::find($id);
 
        $banking->status = "Deleted";
-       $banking->updatedby = "1";
+       $banking->updatedby = Auth::user()->id;
 
        $banking->save();
        session()->flash('success','Transaction has removed for admin approval!!');
@@ -127,7 +128,7 @@ class BankingController extends Controller
         $banking = Banking::find($id);
 
         $banking->status = "Active";
-        $banking->updatedby = "1";
+        $banking->updatedby = Auth::user()->id;
 
         $banking->save();
         session()->flash('success','Transaction has activated successfully!!');

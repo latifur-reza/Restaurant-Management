@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Barcode;
+use Auth;
 use Illuminate\Http\Request;
 
 class BarcodeController extends Controller
@@ -51,8 +52,8 @@ class BarcodeController extends Controller
 
       $barcode->code = $request->code;
       $barcode->status = "Active";
-      $barcode->createdby = "1";
-      $barcode->updatedby = "1";
+      $barcode->createdby = Auth::user()->id;
+      $barcode->updatedby = Auth::user()->id;
 
       $barcode->save();
       session()->flash('success','Barcode has created successfully!!');
@@ -99,7 +100,7 @@ class BarcodeController extends Controller
       $barcode = Barcode::find($id);
 
       $barcode->code = $request->code;
-      $barcode->updatedby = "1";
+      $barcode->updatedby = Auth::user()->id;
 
       $barcode->save();
       session()->flash('success','Barcode has updated successfully!!');
@@ -121,7 +122,7 @@ class BarcodeController extends Controller
        $barcode = Barcode::find($id);
 
        $barcode->status = "Deleted";
-       $barcode->updatedby = "1";
+       $barcode->updatedby = Auth::user()->id;
 
        $barcode->save();
        session()->flash('success','Barcode has deleted successfully!!');
@@ -139,7 +140,7 @@ class BarcodeController extends Controller
         $barcode = Barcode::find($id);
 
         $barcode->status = "Active";
-        $barcode->updatedby = "1";
+        $barcode->updatedby = Auth::user()->id;
 
         $barcode->save();
         session()->flash('success','Barcode has activated successfully!!');

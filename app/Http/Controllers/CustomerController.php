@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use Auth;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -56,8 +57,8 @@ class CustomerController extends Controller
       $customer->phone = $request->phone;
       $customer->email = $request->email;
       $customer->status = "Active";
-      $customer->createdby = "1";
-      $customer->updatedby = "1";
+      $customer->createdby = Auth::user()->id;
+      $customer->updatedby = Auth::user()->id;
 
       $customer->save();
       session()->flash('success','Customer has created successfully!!');
@@ -110,7 +111,7 @@ class CustomerController extends Controller
       $customer->phone = $request->phone;
       $customer->email = $request->email;
 
-      $customer->updatedby = "1";
+      $customer->updatedby = Auth::user()->id;
 
       $customer->save();
       session()->flash('success','Customer has updated successfully!!');
@@ -132,7 +133,7 @@ class CustomerController extends Controller
        $customer = Customer::find($id);
 
        $customer->status = "Deleted";
-       $customer->updatedby = "1";
+       $customer->updatedby = Auth::user()->id;
 
        $customer->save();
        session()->flash('success','Customer has deleted successfully!!');
@@ -150,7 +151,7 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
 
         $customer->status = "Active";
-        $customer->updatedby = "1";
+        $customer->updatedby = Auth::user()->id;
 
         $customer->save();
         session()->flash('success','Customer has activated successfully!!');

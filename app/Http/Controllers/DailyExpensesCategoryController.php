@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DailyExpensesCategory;
 use Illuminate\Http\Request;
+use Auth;
 
 class DailyExpensesCategoryController extends Controller
 {
@@ -50,8 +51,8 @@ class DailyExpensesCategoryController extends Controller
 
         $dailyexpensescategory->categoryname = $request->categoryname;
         $dailyexpensescategory->status = "Active";
-        $dailyexpensescategory->createdby = "1";
-        $dailyexpensescategory->updatedby = "1";
+        $dailyexpensescategory->createdby = Auth::user()->id;
+        $dailyexpensescategory->updatedby = Auth::user()->id;
 
         $dailyexpensescategory->save();
         session()->flash('success','Category has created successfully!!');
@@ -97,7 +98,7 @@ class DailyExpensesCategoryController extends Controller
       $dailyexpensescategory = DailyExpensesCategory::find($id);
 
       $dailyexpensescategory->categoryname = $request->categoryname;
-      $dailyexpensescategory->updatedby = "1";
+      $dailyexpensescategory->updatedby = Auth::user()->id;
 
       $dailyexpensescategory->save();
       session()->flash('success','Category has updated successfully!!');
@@ -119,7 +120,7 @@ class DailyExpensesCategoryController extends Controller
        $dailyexpensescategory = DailyExpensesCategory::find($id);
 
        $dailyexpensescategory->status = "Deleted";
-       $dailyexpensescategory->updatedby = "1";
+       $dailyexpensescategory->updatedby = Auth::user()->id;
 
        $dailyexpensescategory->save();
        session()->flash('success','Category has deleted successfully!!');
@@ -137,7 +138,7 @@ class DailyExpensesCategoryController extends Controller
         $dailyexpensescategory = DailyExpensesCategory::find($id);
 
         $dailyexpensescategory->status = "Active";
-        $dailyexpensescategory->updatedby = "1";
+        $dailyexpensescategory->updatedby = Auth::user()->id;
 
         $dailyexpensescategory->save();
         session()->flash('success','Category has activated successfully!!');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Staff;
 use Illuminate\Http\Request;
+use Auth;
 
 class StaffController extends Controller
 {
@@ -61,8 +62,8 @@ class StaffController extends Controller
       $staff->salary = $request->salary;
       $staff->joiningdate = $request->joiningdate;
       $staff->status = "Active";
-      $staff->createdby = "1";
-      $staff->updatedby = "1";
+      $staff->createdby = Auth::user()->id;
+      $staff->updatedby = Auth::user()->id;
 
       $staff->save();
       session()->flash('success','Staff has created successfully!!');
@@ -120,7 +121,7 @@ class StaffController extends Controller
       $staff->salary = $request->salary;
       $staff->joiningdate = $request->joiningdate;
 
-      $staff->updatedby = "1";
+      $staff->updatedby = Auth::user()->id;
 
       $staff->save();
       session()->flash('success','Staff has updated successfully!!');
@@ -143,7 +144,7 @@ class StaffController extends Controller
        $staff = Staff::find($id);
 
        $staff->status = "Deleted";
-       $staff->updatedby = "1";
+       $staff->updatedby = Auth::user()->id;
 
        $staff->save();
        session()->flash('success','Staff has deleted successfully!!');
@@ -161,7 +162,7 @@ class StaffController extends Controller
         $staff = Staff::find($id);
 
         $staff->status = "Active";
-        $staff->updatedby = "1";
+        $staff->updatedby = Auth::user()->id;
 
         $staff->save();
         session()->flash('success','Staff has activated successfully!!');

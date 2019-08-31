@@ -92,6 +92,15 @@ Route::middleware(['auth' , 'manager'])->group(function () {
 
 
     Route::middleware(['admin'])->group(function () {
+        //manager routes
+        Route::get('/createmanager', 'ManagerController@create')->name('createmanager');
+        Route::post('/createmanager', 'ManagerController@store')->name('createmanager.store');
+        Route::get('/managerlist', 'ManagerController@index')->name('managerlist');
+        Route::post('/managerdelete/{id}', 'ManagerController@delete')->name('managerdelete');
+        Route::post('/makeadmin/{id}', 'ManagerController@makeadmin')->name('makeadmin');
+        Route::post('/makemanager/{id}', 'ManagerController@makemanager')->name('makemanager');
+        Route::post('/makenone/{id}', 'ManagerController@makenone')->name('makenone');
+
         //category routes
         Route::get('/categoryarc', 'CategoryController@indexarc')->name('categoryarc');
         Route::post('/categorydestroy/{id}', 'CategoryController@destroy')->name('categorydestroy');
@@ -141,7 +150,7 @@ Route::middleware(['auth' , 'manager'])->group(function () {
         Route::get('/fixedcostsexpensesarc', 'FixedCostsExpensesController@indexarc')->name('fixedcostsexpensesarc');
         Route::post('/fixedcostsexpensesdestroy/{id}', 'FixedCostsExpensesController@destroy')->name('fixedcostsexpensesdestroy');
         Route::post('/fixedcostsexpensesactive/{id}', 'FixedCostsExpensesController@active')->name('fixedcostsexpensesactive');
-        
+
     });
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FixedCosts;
 use Illuminate\Http\Request;
+use Auth;
 
 class FixedCostsController extends Controller
 {
@@ -54,8 +55,8 @@ class FixedCostsController extends Controller
         $fixedcosts->amount = $request->amount;
 
         $fixedcosts->status = "Active";
-        $fixedcosts->createdby = "1";
-        $fixedcosts->updatedby = "1";
+        $fixedcosts->createdby = Auth::user()->id;
+        $fixedcosts->updatedby = Auth::user()->id;
 
         $fixedcosts->save();
         session()->flash('success','Costing has added successfully!!');
@@ -104,7 +105,7 @@ class FixedCostsController extends Controller
         $fixedcosts->reason = $request->reason;
         $fixedcosts->amount = $request->amount;
 
-        $fixedcosts->updatedby = "1";
+        $fixedcosts->updatedby = Auth::user()->id;
 
         $fixedcosts->save();
         session()->flash('success','Costing has updated successfully!!');
@@ -126,7 +127,7 @@ class FixedCostsController extends Controller
          $fixedcosts = FixedCosts::find($id);
 
          $fixedcosts->status = "Deleted";
-         $fixedcosts->updatedby = "1";
+         $fixedcosts->updatedby = Auth::user()->id;
 
          $fixedcosts->save();
          session()->flash('success','Costing has deleted successfully!!');
@@ -144,7 +145,7 @@ class FixedCostsController extends Controller
         $fixedcosts = FixedCosts::find($id);
 
         $fixedcosts->status = "Active";
-        $fixedcosts->updatedby = "1";
+        $fixedcosts->updatedby = Auth::user()->id;
 
         $fixedcosts->save();
         session()->flash('success','Costing has activated successfully!!');

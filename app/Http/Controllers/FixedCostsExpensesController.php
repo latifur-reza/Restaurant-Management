@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\FixedCostsExpenses;
 use App\FixedCosts;
 use Illuminate\Http\Request;
+use Auth;
 
 class FixedCostsExpensesController extends Controller
 {
@@ -60,8 +61,8 @@ class FixedCostsExpensesController extends Controller
         $fixedcostsexpenses->ext = $request->ext;
 
         $fixedcostsexpenses->status = "Active";
-        $fixedcostsexpenses->createdby = "1";
-        $fixedcostsexpenses->updatedby = "1";
+        $fixedcostsexpenses->createdby = Auth::user()->id;
+        $fixedcostsexpenses->updatedby = Auth::user()->id;
 
         $fixedcostsexpenses->save();
         session()->flash('success','Expense has done successfully!!');
@@ -113,7 +114,7 @@ class FixedCostsExpensesController extends Controller
          $fixedcostsexpenses = FixedCostsExpenses::find($id);
 
          $fixedcostsexpenses->status = "Deleted";
-         $fixedcostsexpenses->updatedby = "1";
+         $fixedcostsexpenses->updatedby = Auth::user()->id;
 
          $fixedcostsexpenses->save();
          session()->flash('success','Costing has deleted for admin approval!!');
@@ -131,7 +132,7 @@ class FixedCostsExpensesController extends Controller
         $fixedcostsexpenses = FixedCostsExpenses::find($id);
 
         $fixedcostsexpenses->status = "Active";
-        $fixedcostsexpenses->updatedby = "1";
+        $fixedcostsexpenses->updatedby = Auth::user()->id;
 
         $fixedcostsexpenses->save();
         session()->flash('success','Costing has activated successfully!!');
