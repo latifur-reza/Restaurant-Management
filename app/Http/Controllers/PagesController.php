@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function index(){
-      return view('pages.blank');
+      return view('pages.home.dashboard');
+    }
+
+    public function nopermit(){
+      return view('auth.nopermit');
     }
 
 }

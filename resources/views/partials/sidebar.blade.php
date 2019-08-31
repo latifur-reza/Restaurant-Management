@@ -39,9 +39,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('categorylist') }}">Category List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('categoryarc') }}">Category Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('categoryarc') }}">Category Archive</a>
+                    </li>
+                @endif
+
               </ul>
             </div>
           </li>
@@ -60,9 +63,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('menulist') }}">Menu List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('menuarc') }}">Menu Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('menuarc') }}">Menu Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
@@ -82,9 +87,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('barcodelist') }}">Barcode List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('barcodearc') }}">Barcode Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('barcodearc') }}">Barcode Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
@@ -104,35 +111,39 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('customerlist') }}">Customer List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('customerarc') }}">Customer Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('customerarc') }}">Customer Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
           </li>
+          @if (Auth::user()->permission == "Admin")
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#Manager" aria-expanded="false" aria-controls="ui-basic">
+                  <i class="menu-icon fa fa-user-plus"></i>
+                  <span class="menu-title">Manager</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="Manager">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                      <a class="nav-link" href="./manageradd.php">Add Manager</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="./managerlist.php">Manager List</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="./managerlistarc.php">Manager Archive</a>
+                    </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#Manager" aria-expanded="false" aria-controls="ui-basic">
-              <i class="menu-icon fa fa-user-plus"></i>
-              <span class="menu-title">Manager</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="Manager">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="./manageradd.php">Add Manager</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./managerlist.php">Manager List</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./managerlistarc.php">Manager Archive</a>
-                </li>
+                  </ul>
+                </div>
+              </li>
+          @endif
 
-              </ul>
-            </div>
-          </li>
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#Staff" aria-expanded="false" aria-controls="ui-basic">
@@ -148,9 +159,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('stafflist') }}">Staff List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('staffarc') }}">Staff Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('staffarc') }}">Staff Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
@@ -170,9 +183,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('bankinglist') }}">Transaction List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('bankingarc') }}">Transaction Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('bankingarc') }}">Transaction Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
@@ -192,15 +207,20 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('fixedcostslist') }}">Fixed Expense Reason</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('fixedcostsarc') }}">Fixed Expense Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('fixedcostsarc') }}">Fixed Expense Archive</a>
+                    </li>
+                @endif
+
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('fixedcostsexpenseslist') }}">Expense List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('fixedcostsexpensesarc') }}">Expense Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('fixedcostsexpensesarc') }}">Expense Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
@@ -220,18 +240,23 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('dailyexpensescategorylist') }}">Category List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('dailyexpensescategoryarc') }}">Category Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('dailyexpensescategoryarc') }}">Category Archive</a>
+                    </li>
+                @endif
+
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('createdailyexpenses') }}">Expense Now</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('dailyexpenseslist') }}">Expense List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('dailyexpensesarc') }}">Expense Archive</a>
-                </li>
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('dailyexpensesarc') }}">Expense Archive</a>
+                    </li>
+                @endif
 
               </ul>
             </div>
