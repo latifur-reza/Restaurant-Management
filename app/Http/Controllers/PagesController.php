@@ -14,4 +14,9 @@ class PagesController extends Controller
       return view('auth.nopermit');
     }
 
+    public function servicenew(){
+      return view('pages.home.serve');
+    }
+
+
 }
