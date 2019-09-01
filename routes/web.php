@@ -92,6 +92,9 @@ Route::middleware(['auth' , 'manager'])->group(function () {
 
 
     Route::middleware(['admin'])->group(function () {
+        //service route
+        Route::get('/servicenew', 'PagesController@servicenew')->name('servicenew');
+
         //manager routes
         Route::get('/createmanager', 'ManagerController@create')->name('createmanager');
         Route::post('/createmanager', 'ManagerController@store')->name('createmanager.store');
