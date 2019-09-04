@@ -18,5 +18,9 @@ class PagesController extends Controller
       return view('pages.home.serve');
     }
 
+    public function servicetest(){
+      return view('pages.home.test');
+    }
+
 
 }

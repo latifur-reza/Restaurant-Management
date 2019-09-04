@@ -7,7 +7,30 @@
 /* .list-group {
     list-style: decimal inside !important
 } */
-
+.servs{
+  text-align: center;
+  font-weight: bold;
+}
+.servs label{
+    cursor: pointer;
+    width: 100%;
+}
+.servs label input{
+    display: none;
+}
+.servs label span{
+    background: #00CE68;
+    color: #fff;
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+}
+.servs label input:checked ~ span{
+    background: green;
+    color: #fff;
+    display: block;
+    padding: 5px;
+}
 .list-group-item {
     display: list-item !important
 }

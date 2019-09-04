@@ -19,7 +19,7 @@
                   <a class="nav-link" href="{!! route('servicenew') !!}">Service New</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">In Kitchen</a>
+                  <a class="nav-link" href="{!! route('servicetest') !!}">In Kitchen</a>
                 </li>
               </ul>
             </div>
