@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
+use App\Category;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -19,7 +21,9 @@ class PagesController extends Controller
     }
 
     public function servicetest(){
-      return view('pages.home.test');
+        $category = Category::orderBy('categoryname','asc')->where('status','Active')->get();
+        $menu = Menu::orderBy('categoryname','asc')->orderBy('food','asc')->where('status','Active')->get();
+        return view('pages.home.test')->with('category',$category)->with('menu',$menu);
     }
 
 
