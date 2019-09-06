@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-4 col-sm-4">
           <h3 class="text-center">Food Category</h3>
           <ul class="list-group text-center" style="list-style: none">
               @foreach ($category as $cat)
@@ -41,39 +41,58 @@
 
           </ul>
         </div>
+        <div class="col-md-8 col-sm-8">
+            <form class="form-group" action="" method="post">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <ol class="list-group text-center" style="list-style: none">
+                          <h3 class="text-center">Receipt Area</h3>
+                          <div id="show">
 
-        <div class="col-md-2 col-sm-2">
+                          </div>
 
-        </div>
-        <div class="col-md-4 col-sm-4">
-          <ol class="list-group text-center" style="list-style: none">
-            <h3 class="text-center">Receipt Area</h3>
-            <div class="" id="show">
+                        </ol>
+                    </div>
 
-            </div>
-            <li class="list-group-item list-group-item-success">
-              Grand Total
-              <div class="row">
-                <div class="col-sm-2">
+                    <div class="col-md-6 col-sm-6">
+                        <ol class="list-group text-center" style="list-style: none">
+                          <h3 class="text-center">Calculation Area</h3>
+                          <li class="list-group-item list-group-item-success">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Table No : <input type="text" class="form-control btn-secondary" name="tableno" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                </div>
+                                <div class="col-sm-6" id="total">
+                                    Total : <input type="text" class="form-control" name="total" value="0" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                  Discount(%) : <input type="text" class="form-control btn-secondary" name="discountTotalPercent" onkeyup="calculateDiscount()" id="percentDiscountId" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                              </div>
+                              <div class="col-sm-6">
+                                  Discount($) : <input type="text" class="form-control btn-secondary" name="discountTotalCash" onkeyup="calculateDiscount()" id="cashDiscountId" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                              </div>
 
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    VAT(%) : <input type="text" class="form-control" name="vat" value="0" readonly>
+                                </div>
+                                <div class="col-sm-6" id="grandtotal">
+                                    Grand Total : <input type="text" class="form-control" name="grandtotal" value="0" readonly>
+                                </div>
+                            </div>
+                          </li>
+
+                        </ol>
+                        <br>
+                        <div class="text-center" id="submitbtn">
+
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-
-                </div>
-                <div class="col-sm-2">
-
-                </div>
-                <div class="col-sm-6">
-                  <button class="btn btn-light" style="padding: .375rem .75rem"><span id="grandtotal">0</span></button>
-                </div>
-              </div>
-            </li>
-
-          </ol>
-          <br>
-          <div class="text-center">
-            <button class="btn btn-success">Confirm</button>
-          </div>
+            </form>
         </div>
 
       </div>
@@ -81,6 +100,7 @@
 
 
     <script type="text/javascript">
+        var finalTotal = 0;
         var menuCodeArray = [];
         var itemall = {!! json_encode($menu->toArray()) !!};
 
@@ -146,40 +166,92 @@
             var food = "No name";
             var price = 0;
             var quantity = 0;
+            var discountPercent = 0;
+            var discountCash = 0;
+            var offer = "";
             var total = 0;
             var grandTotal = 0;
             for (var i = 0; i < menuCodeArray.length; i++) {
                 for (var j = 0; j < itemall.length; j++) {
                     if (itemall[j].id == menuCodeArray[i]) {
+                        code = itemall[j].id;
+                        categoryname = itemall[j].categoryname;
                         food = itemall[j].food;
                         price = itemall[j].price;
                         quantity = itemall[j].quantity;
+                        discountCash = itemall[j].discountcash;
+                        discountPercent = itemall[j].discountpercent;
+                        price = price - discountCash;
+                        price = price - (discountPercent * price)/100;
                         total = price * quantity;
                         grandTotal += total;
                     }
                 }
+                if (discountPercent>0) {
+                    offer = '<div style="color: red">('+discountPercent+'% Discount)</div>';
+                }
+                else if (discountCash>0) {
+                    offer = '<div style="color: red">('+discountCash+' Taka Discount)</div>';
+                }else {
+                    offer = "";
+                }
                 items += '<li class="list-group-item list-group-item-success">\
                   '+food+'\
+                  '+offer+'\
                   <div class="row">\
-                    <div class="col-sm-2">\
-                      <button class="btn btn-success" style="padding: .375rem .75rem" onClick="incrementQuantity(\''+menuCodeArray[i]+'\')"><i style="margin: 0px" class="fa fa-plus"></i></button>\
-                    </div>\
-                    <div class="col-sm-2">\
-                      <button class="btn btn-danger" style="padding: .375rem .75rem" onClick="decrementQuantity(\''+menuCodeArray[i]+'\')"><i style="margin: 0px" class="fa fa-minus"></i></button>\
-                    </div>\
-                    <div class="col-sm-2">\
-                      <button class="btn btn-danger" style="padding: .375rem .75rem" onClick="removeItem(\''+menuCodeArray[i]+'\')"><i style="margin: 0px" class="fa fa-times"></i></button>\
-                    </div>\
-                    <div class="col-sm-6">\
-                      <button class="btn btn-light" style="padding: .375rem .75rem"><span>'+quantity+'x'+price+'='+total+'</span></button>\
+                    <div class="col-sm-12">\
+                      <button class="btn btn-success pull-left" style="padding: .375rem .75rem;margin: 0px 2px" onClick="incrementQuantity(\''+menuCodeArray[i]+'\')"><i style="margin: 0px" class="fa fa-plus"></i></button>\
+                      <button class="btn btn-primary pull-left" style="padding: .375rem .75rem;margin: 0px 2px" onClick="decrementQuantity(\''+menuCodeArray[i]+'\')"><i style="margin: 0px" class="fa fa-minus"></i></button>\
+                      <button class="btn btn-danger pull-left" style="padding: .375rem .75rem;margin: 0px 2px" onClick="removeItem(\''+menuCodeArray[i]+'\')"><i style="margin: 0px" class="fa fa-times"></i></button>\
+                      <input type="text" class="form-control pull-right" style="max-width: 120px; font-weight: bold; height: 28px; text-align: center" name="calc[]" value="'+quantity+'x'+price+'='+total+'" readonly>\
+                      <input type="hidden" name="menucode[]" value="'+code+'">\
+                      <input type="hidden" name="categoryname[]" value="'+categoryname+'">\
+                      <input type="hidden" name="food[]" value="'+food+'">\
+                      <input type="hidden" name="price[]" value="'+price+'">\
+                      <input type="hidden" name="quantity[]" value="'+quantity+'">\
+                      <input type="hidden" name="discountcash[]" value="'+discountCash+'">\
+                      <input type="hidden" name="discountpercent[]" value="'+discountPercent+'">\
+                      <input type="hidden" name="total[]" value="'+total+'">\
                     </div>\
                   </div>\
-                </li>'
+                </li>';
             }
-
+            finalTotal = grandTotal;
             document.getElementById("show").innerHTML = items;
-            document.getElementById("grandtotal").innerHTML = grandTotal;
+            var totalBox;
+            totalBox = 'Total : <input type="text" class="form-control" name="total" value="'+grandTotal+'" readonly>';
+            document.getElementById("total").innerHTML = totalBox;
+            var btn;
+            if (menuCodeArray.length > 0) {
+                btn = '<input type="submit" class="btn btn-success" name="confirm" value="Confirm">';
+            }else {
+                btn = "";
+            }
+            document.getElementById("submitbtn").innerHTML = btn;
+            calculateDiscount();
         }
+    </script>
+
+    <script type="text/javascript">
+    function calculateDiscount(){
+        var disCash = document.getElementById("cashDiscountId").value;
+        if (disCash == "") {
+            disCash = 0;
+        }
+        var disPer = document.getElementById("percentDiscountId").value;
+        if (disPer == "") {
+            disPer = 0;
+        }
+        var vat = 0;
+        var final;
+        final = finalTotal - disCash;
+        final = final - (final*disPer)/100;
+        final = final + (final*vat)/100;
+        var grandTotalBox;
+        grandTotalBox = 'Grand Total : <input type="text" class="form-control" name="grandtotal" value="'+final+'" readonly>';
+        document.getElementById("grandtotal").innerHTML = grandTotalBox;
+
+    }
     </script>
 
 @endsection
