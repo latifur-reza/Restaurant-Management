@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\FixedCostsExpenses;
-use App\FixedCosts;
+use App\Models\FixedCostsExpenses;
+use App\Models\FixedCosts;
 use Illuminate\Http\Request;
 use Auth;
 

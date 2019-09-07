@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DailyExpensesCategory;
+use App\Models\DailyExpensesCategory;
 use Illuminate\Http\Request;
 use Auth;
 

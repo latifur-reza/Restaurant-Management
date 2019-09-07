@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\FixedCosts;
+use App\Models\FixedCosts;
 use Illuminate\Http\Request;
 use Auth;
 

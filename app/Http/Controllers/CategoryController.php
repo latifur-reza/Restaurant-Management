@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Category;
+use App\Models\Category;
 use Auth;
 
 class CategoryController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Staff;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Auth;
 

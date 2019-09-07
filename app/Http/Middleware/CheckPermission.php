@@ -16,7 +16,7 @@ class CheckPermission
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->permission == 'None') {
+        if (Auth::user()->permission == 'None' || Auth::user()->permission == 'Deleted') {
             Auth::logout();
 
             $request->session()->invalidate();

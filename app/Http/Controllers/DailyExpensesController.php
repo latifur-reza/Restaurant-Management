@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DailyExpenses;
-use App\DailyExpensesCategory;
+use App\Models\DailyExpenses;
+use App\Models\DailyExpensesCategory;
 use Illuminate\Http\Request;
 use Auth;
 

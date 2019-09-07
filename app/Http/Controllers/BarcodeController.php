@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Barcode;
+use App\Models\Barcode;
 use Auth;
 use Illuminate\Http\Request;
 
