@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4 col-sm-4">
+        <div class="col-md-4 col-sm-4 mb-3">
           <h3 class="text-center">Food Category</h3>
           <ul class="list-group text-center" style="list-style: none">
               @foreach ($category as $cat)
@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <ol class="list-group text-center" style="list-style: none">
-                          <h3 class="text-center">Receipt Area</h3>
+                          <h3 class="text-center">Receipt</h3>
                           <div id="show">
 
                           </div>
@@ -56,7 +56,7 @@
 
                     <div class="col-md-6 col-sm-6">
                         <ol class="list-group text-center" style="list-style: none">
-                          <h3 class="text-center">Calculation Area</h3>
+                          <h3 class="text-center">Calculation</h3>
                           <li class="list-group-item list-group-item-success">
                             <div class="row">
                                 <div class="col-sm-6">
