@@ -42,7 +42,8 @@
           </ul>
         </div>
         <div class="col-md-8 col-sm-8">
-            <form class="form-group" action="" method="post">
+            <form class="form-group" action="{!! route('servicestore') !!}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <ol class="list-group text-center" style="list-style: none">
@@ -60,7 +61,7 @@
                           <li class="list-group-item list-group-item-success">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    Table No : <input type="text" class="form-control btn-secondary" name="tableno" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                    Table No : <input type="text" class="form-control" name="tableno" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                 </div>
                                 <div class="col-sm-6" id="total">
                                     Total : <input type="text" class="form-control" name="total" value="0" readonly>
@@ -68,10 +69,10 @@
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
-                                  Discount(%) : <input type="text" class="form-control btn-secondary" name="discountTotalPercent" onkeyup="calculateDiscount()" id="percentDiscountId" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                  Discount(%) : <input type="text" class="form-control" name="discounttotalpercent" onkeyup="calculateDiscount()" id="percentDiscountId" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                               </div>
                               <div class="col-sm-6">
-                                  Discount($) : <input type="text" class="form-control btn-secondary" name="discountTotalCash" onkeyup="calculateDiscount()" id="cashDiscountId" value="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                  Discount($) : <input type="text" class="form-control" name="discounttotalcash" onkeyup="calculateDiscount()" id="cashDiscountId" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                               </div>
 
                             </div>
@@ -79,10 +80,53 @@
                                 <div class="col-sm-6">
                                     VAT(%) : <input type="text" class="form-control" name="vat" value="0" readonly>
                                 </div>
+                                <div class="col-sm-6">
+                                    Service Charge(%) : <input type="text" class="form-control" name="servicecharge" value="0" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                </div>
                                 <div class="col-sm-6" id="grandtotal">
                                     Grand Total : <input type="text" class="form-control" name="grandtotal" value="0" readonly>
                                 </div>
                             </div>
+                          </li>
+
+                          <li class="list-group-item list-group-item-success">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Pay Type :
+                                    <select class="form-control" name="paytype">
+                                        <option value="Cash">Cash</option>
+                                        <option value="Card">Card</option>
+                                        <option value="bCash">bCash</option>
+                                        <option value="Rocket">Rocket</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    Cash Received : <input type="text" class="form-control btn-success" name="receivedcash" placeholder="0" onkeyup="calculateChange()" id="receivedCash" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" />
+                                </div>
+
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                  Transaction No : <input type="text" class="form-control" name="transactionno" value="" />
+                              </div>
+                              <div class="col-sm-6" id="changeAmount">
+                                  Change : <input type="text" class="form-control" name="change" value="0" readonly>
+
+                              </div>
+
+                            </div>
+                            @foreach ($customer as $c)
+                                <input type="hidden" name="id" value="{{$c->id}}">
+                                <input type="hidden" name="name" value="{{$c->name}}">
+                                <input type="hidden" name="email" value="{{$c->email}}">
+                                <input type="hidden" name="phone" value="{{$c->phone}}">
+                                <input type="hidden" name="barcode" value="{{$c->barcode}}">
+                            @endforeach
                           </li>
 
                         </ol>
@@ -101,6 +145,7 @@
 
     <script type="text/javascript">
         var finalTotal = 0;
+        var payable = 0;
         var menuCodeArray = [];
         var itemall = {!! json_encode($menu->toArray()) !!};
 
@@ -177,6 +222,7 @@
                         code = itemall[j].id;
                         categoryname = itemall[j].categoryname;
                         food = itemall[j].food;
+                        originalprice = itemall[j].price;
                         price = itemall[j].price;
                         quantity = itemall[j].quantity;
                         discountCash = itemall[j].discountcash;
@@ -207,11 +253,12 @@
                       <input type="hidden" name="menucode[]" value="'+code+'">\
                       <input type="hidden" name="categoryname[]" value="'+categoryname+'">\
                       <input type="hidden" name="food[]" value="'+food+'">\
+                      <input type="hidden" name="originalprice[]" value="'+originalprice+'">\
                       <input type="hidden" name="price[]" value="'+price+'">\
                       <input type="hidden" name="quantity[]" value="'+quantity+'">\
                       <input type="hidden" name="discountcash[]" value="'+discountCash+'">\
                       <input type="hidden" name="discountpercent[]" value="'+discountPercent+'">\
-                      <input type="hidden" name="total[]" value="'+total+'">\
+                      <input type="hidden" name="itemtotal[]" value="'+total+'">\
                     </div>\
                   </div>\
                 </li>';
@@ -233,25 +280,45 @@
     </script>
 
     <script type="text/javascript">
-    function calculateDiscount(){
-        var disCash = document.getElementById("cashDiscountId").value;
-        if (disCash == "") {
-            disCash = 0;
+        function calculateDiscount(){
+            var disCash = document.getElementById("cashDiscountId").value;
+            if (disCash == "") {
+                disCash = 0;
+            }
+            var disPer = document.getElementById("percentDiscountId").value;
+            if (disPer == "") {
+                disPer = 0;
+            }
+            var vat = 0;
+            var servicecharge = 0;
+            var final;
+            final = finalTotal - disCash;
+            final = final - (final*disPer)/100;
+            final = final + (final*vat)/100 + (final*servicecharge)/100;
+            var grandTotalBox;
+            grandTotalBox = 'Grand Total : <input type="text" class="form-control" name="grandtotal" value="'+final+'" readonly>';
+            document.getElementById("grandtotal").innerHTML = grandTotalBox;
+            payable = final;
+            calculateChange();
         }
-        var disPer = document.getElementById("percentDiscountId").value;
-        if (disPer == "") {
-            disPer = 0;
-        }
-        var vat = 0;
-        var final;
-        final = finalTotal - disCash;
-        final = final - (final*disPer)/100;
-        final = final + (final*vat)/100;
-        var grandTotalBox;
-        grandTotalBox = 'Grand Total : <input type="text" class="form-control" name="grandtotal" value="'+final+'" readonly>';
-        document.getElementById("grandtotal").innerHTML = grandTotalBox;
+    </script>
 
-    }
+    <script type="text/javascript">
+        function calculateChange(){
+            var receivedCash = document.getElementById("receivedCash").value;
+            if (receivedCash == "") {
+                receivedCash = 0;
+            }
+            var changeAmount;
+            changeAmount = 0;
+            if (receivedCash > 0) {
+                changeAmount = payable - receivedCash;
+            }
+            var changeBox;
+            changeBox = 'Change : <input type="text" class="form-control" name="change" value="'+changeAmount+'" readonly>';
+            document.getElementById("changeAmount").innerHTML = changeBox;
+
+        }
     </script>
 
 @endsection

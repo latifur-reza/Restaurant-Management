@@ -16,10 +16,10 @@
             <div class="collapse" id="customerservice">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="{!! route('servicenew') !!}">Service New</a>
+                  <a class="nav-link" href="{!! route('servenow') !!}">Service New</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{!! route('servicetest') !!}">In Kitchen</a>
+                  <a class="nav-link" href="{!! route('inkitchen') !!}">In Kitchen</a>
                 </li>
               </ul>
             </div>

@@ -16,6 +16,13 @@ Route::middleware(['auth' , 'manager'])->group(function () {
     Route::get('/', 'PagesController@index')->name('index');
     Route::get('/home', 'PagesController@index')->name('index');
 
+    //serve routes
+    Route::get('/serve', 'ServeController@create')->name('servenow');
+    Route::get('/serve/{id}', 'ServeController@createcus')->name('servenowcus');
+    Route::post('/serve', 'ServeController@store')->name('servicestore');
+    Route::get('/inkitchen', 'ServeController@index')->name('inkitchen');
+    Route::post('/serveall/{id}', 'ServeController@served')->name('serveall');
+
     //category routes
     Route::get('/createcategory', 'CategoryController@create')->name('createcategory');
     Route::post('/createcategory', 'CategoryController@store')->name('createcategory.store');
@@ -92,9 +99,6 @@ Route::middleware(['auth' , 'manager'])->group(function () {
 
 
     Route::middleware(['admin'])->group(function () {
-        //service route
-        Route::get('/servicenew', 'PagesController@servicenew')->name('servicenew');
-        Route::get('/servicetest', 'PagesController@servicetest')->name('servicetest');
 
         //manager routes
         Route::get('/createmanager', 'ManagerController@create')->name('createmanager');
