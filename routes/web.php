@@ -97,6 +97,13 @@ Route::middleware(['auth' , 'manager'])->group(function () {
     Route::get('/fixedcostsexpenseslist', 'FixedCostsExpensesController@index')->name('fixedcostsexpenseslist');
     Route::post('/fixedcostsexpensesdelete/{id}', 'FixedCostsExpensesController@delete')->name('fixedcostsexpensesdelete');
 
+    //profile routes
+    Route::get('/myprofile', 'ProfileSettingsController@index')->name('myprofile');
+    Route::get('/editprofile', 'ProfileSettingsController@edit')->name('editprofile');
+    Route::post('/editprofile', 'ProfileSettingsController@update')->name('editprofilenow');
+    Route::get('/changepassword', 'ProfileSettingsController@changepasswordview')->name('changepassword');
+    Route::post('/changepassword', 'ProfileSettingsController@changepassword')->name('changepasswordstore');
+
 
     Route::middleware(['admin'])->group(function () {
 

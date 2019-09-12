@@ -156,10 +156,10 @@
                   </div>
                 </div>
               </a>--}}
-              <a class="dropdown-item mt-2">
+              <a class="dropdown-item mt-2" href="{!! route('myprofile') !!}">
                 View Profile
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="{!! route('changepassword') !!}">
                 Change Password
               </a>
               <a class="dropdown-item" href="{{ route('logout') }}"
