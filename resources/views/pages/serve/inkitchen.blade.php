@@ -16,11 +16,11 @@
       </thead>
       <tbody>
         @php
-          $count = 1;
+          $counter = 1;
         @endphp
         @foreach ($orders as $item)
           <tr>
-            <td>{{$count++}}</td>
+            <td>{{$counter++}}</td>
             <td>{{$item->invoiceno}}</td>
             <td>{{$item->orderno}}</td>
             <td>
