@@ -166,6 +166,11 @@ Route::middleware(['auth' , 'manager'])->group(function () {
         Route::post('/fixedcostsexpensesdestroy/{id}', 'FixedCostsExpensesController@destroy')->name('fixedcostsexpensesdestroy');
         Route::post('/fixedcostsexpensesactive/{id}', 'FixedCostsExpensesController@active')->name('fixedcostsexpensesactive');
 
+        //app settings routes
+        Route::get('/appsettings', 'AppSettingsController@index')->name('appsettings');
+        Route::post('/appsettings', 'AppSettingsController@store')->name('appsettings.store');
+        Route::post('/appsettingsupdate', 'AppSettingsController@update')->name('appsettings.update');
+
     });
 });
 

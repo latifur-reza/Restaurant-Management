@@ -320,25 +320,10 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#settings" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" href="{!! route('appsettings') !!}">
               <i class="menu-icon fa fa-optin-monster"></i>
               <span class="menu-title">App Settings</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="settings">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="./">App Details</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">Service Type</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">VAT</a>
-                </li>
-
-              </ul>
-            </div>
           </li>
 
           <li class="nav-item">
