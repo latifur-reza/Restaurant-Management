@@ -1,7 +1,17 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="{{ route('index') }}" style="color: black">
-          AdminRMS
+            @php
+                $restaurantName = "AdminRMS";
+            @endphp
+            @foreach ($settings as $setName)
+                @if ($setName->reason == "Name")
+                    @php
+                        $restaurantName = $setName->value;
+                    @endphp
+                @endif
+            @endforeach
+          {{$restaurantName}}
         </a>
         <a class="navbar-brand brand-logo-mini" href="{{ route('index') }}" style="color: black">
           RMS

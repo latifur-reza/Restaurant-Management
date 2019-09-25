@@ -75,7 +75,11 @@ class ServeController extends Controller
         if (is_null($servedCustomer->tableno)) {
           $servedCustomer->tableno = 0;
         }
-        $servedCustomer->status = "In Kitchen";
+        if ($request->paymentchecktype == "Pay Last") {
+            $servedCustomer->status = "Served";
+        }else {
+            $servedCustomer->status = "In Kitchen";
+        }
         $servedCustomer->paymentstatus = "Paid";
         $servedCustomer->createdby = Auth::user()->id;
         $servedCustomer->updatedby = Auth::user()->id;
@@ -128,8 +132,14 @@ class ServeController extends Controller
             $servedMenu->save();
         }
 
-        session()->flash('success','Items are added to kitchen!!');
-        return redirect()->route('inkitchen');
+        if ($request->paymentchecktype == "Pay Last") {
+            session()->flash('success','Items are served to customer!!');
+            return back();
+        }else {
+            session()->flash('success','Items are added to kitchen!!');
+            return redirect()->route('inkitchen');
+        }
+
     }
 
     /**

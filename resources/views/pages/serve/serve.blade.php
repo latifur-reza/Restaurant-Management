@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('content')
+    @include('partials.messages')
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4 col-sm-4 mb-3">
@@ -77,11 +78,32 @@
 
                             </div>
                             <div class="row">
+                                @php
+                                    $vatC = 0;
+                                    $serviceC = 0;
+                                    $paymentC = "Pay First";
+                                @endphp
+                                @foreach ($settings as $setEx)
+                                    @if ($setEx->reason == "Vat")
+                                        @php
+                                            $vatC = $setEx->value;
+                                        @endphp
+                                    @elseif ($setEx->reason == "Charge")
+                                        @php
+                                            $serviceC = $setEx->value;
+                                        @endphp
+                                    @elseif ($setEx->reason == "Payment")
+                                        @php
+                                            $paymentC = $setEx->value;
+                                        @endphp
+                                    @endif
+                                @endforeach
                                 <div class="col-sm-6">
-                                    VAT(%) : <input type="text" class="form-control" name="vat" value="0" readonly>
+                                    <input type="hidden" name="paymentchecktype" value="{{$paymentC}}">
+                                    VAT(%) : <input type="text" class="form-control" name="vat" value="{{$vatC}}" readonly>
                                 </div>
                                 <div class="col-sm-6">
-                                    Service Charge(%) : <input type="text" class="form-control" name="servicecharge" value="0" readonly>
+                                    Service Charge(%) : <input type="text" class="form-control" name="servicecharge" value="{{$serviceC}}" readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -126,6 +148,7 @@
                                 <input type="hidden" name="email" value="{{$c->email}}">
                                 <input type="hidden" name="phone" value="{{$c->phone}}">
                                 <input type="hidden" name="barcode" value="{{$c->barcode}}">
+
                             @endforeach
                           </li>
 
@@ -148,6 +171,7 @@
         var payable = 0;
         var menuCodeArray = [];
         var itemall = {!! json_encode($menu->toArray()) !!};
+        var settings = {!! json_encode($settings->toArray()) !!};
 
         for (var k = 0; k < itemall.length; k++) {
             itemall[k].quantity = 1;
@@ -268,13 +292,7 @@
             var totalBox;
             totalBox = 'Total : <input type="text" class="form-control" name="total" value="'+grandTotal+'" readonly>';
             document.getElementById("total").innerHTML = totalBox;
-            var btn;
-            if (menuCodeArray.length > 0) {
-                btn = '<input type="submit" class="btn btn-success" name="confirm" value="Confirm">';
-            }else {
-                btn = "";
-            }
-            document.getElementById("submitbtn").innerHTML = btn;
+
             calculateDiscount();
         }
     </script>
@@ -289,12 +307,22 @@
             if (disPer == "") {
                 disPer = 0;
             }
+
             var vat = 0;
             var servicecharge = 0;
+            for (var s = 0; s < settings.length; s++) {
+                if (settings[s].reason == "Vat") {
+                    vat = settings[s].value;
+                }
+                else if (settings[s].reason == "Charge") {
+                    servicecharge = settings[s].value;
+                }
+            }
             var final;
             final = finalTotal - disCash;
             final = final - (final*disPer)/100;
             final = final + (final*vat)/100 + (final*servicecharge)/100;
+            final = Math.round(final*1000)/1000;
             var grandTotalBox;
             grandTotalBox = 'Grand Total : <input type="text" class="form-control" name="grandtotal" value="'+final+'" readonly>';
             document.getElementById("grandtotal").innerHTML = grandTotalBox;
@@ -314,10 +342,17 @@
             if (receivedCash > 0) {
                 changeAmount = payable - receivedCash;
             }
+            changeAmount = Math.round(changeAmount*1000)/1000
             var changeBox;
             changeBox = 'Change : <input type="text" class="form-control" name="change" value="'+changeAmount+'" readonly>';
             document.getElementById("changeAmount").innerHTML = changeBox;
-
+            var btn;
+            if (menuCodeArray.length > 0 && receivedCash>=payable) {
+                btn = '<input type="submit" class="btn btn-success" name="confirm" value="Confirm">';
+            }else {
+                btn = "";
+            }
+            document.getElementById("submitbtn").innerHTML = btn;
         }
     </script>
 

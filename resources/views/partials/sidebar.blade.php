@@ -18,9 +18,22 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{!! route('servenow') !!}">Service New</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{!! route('inkitchen') !!}">In Kitchen</a>
-                </li>
+                @php
+                    $restaurantPayment = "Pay First";
+                @endphp
+                @foreach ($settings as $setPay)
+                    @if ($setPay->reason == "Payment")
+                        @php
+                            $restaurantPayment = $setPay->value;
+                        @endphp
+                    @endif
+                @endforeach
+                @if ($restaurantPayment == "Pay First")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{!! route('inkitchen') !!}">In Kitchen</a>
+                    </li>
+                @endif
+
               </ul>
             </div>
           </li>
