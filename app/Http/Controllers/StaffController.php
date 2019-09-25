@@ -15,13 +15,13 @@ class StaffController extends Controller
      */
      public function index()
      {
-         $staff = Staff::orderBy('name','asc')->where('status','Active')->get();
+         $staff = Staff::orderBy('type','asc')->where('status','Active')->get();
          return view('pages.staff.list')->with('staff',$staff);
      }
 
      public function indexarc()
      {
-         $staff = Staff::orderBy('name','asc')->where('status','Deleted')->get();
+         $staff = Staff::orderBy('type','asc')->where('status','Deleted')->get();
          return view('pages.staff.listarc')->with('staff',$staff);
      }
 
@@ -45,6 +45,7 @@ class StaffController extends Controller
     {
       $request->validate([
         'name' => 'required|max:150',
+        'type' => 'nullable',
         'email' => 'nullable',
         'phone' => 'nullable',
         'address' => 'nullable',
@@ -56,6 +57,7 @@ class StaffController extends Controller
       $staff = new Staff;
 
       $staff->name = $request->name;
+      $staff->type = $request->type;
       $staff->email = $request->email;
       $staff->phone = $request->phone;
       $staff->address = $request->address;
@@ -104,6 +106,7 @@ class StaffController extends Controller
     {
       $request->validate([
         'name' => 'required|max:150',
+        'type' => 'nullable',
         'email' => 'nullable',
         'phone' => 'nullable',
         'address' => 'nullable',
@@ -115,6 +118,7 @@ class StaffController extends Controller
       $staff = Staff::find($id);
 
       $staff->name = $request->name;
+      $staff->type = $request->type;
       $staff->email = $request->email;
       $staff->phone = $request->phone;
       $staff->address = $request->address;

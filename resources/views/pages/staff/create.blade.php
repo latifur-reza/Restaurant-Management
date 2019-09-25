@@ -14,6 +14,16 @@
             <input type="text" class="form-control" placeholder="Example: Mr. Staff" name="name" autofocus required>
           </div>
           <div class="form-group">
+            <label for="type" class="text-center"> <b>Type : </b><span style="color: red">*</span></label>
+            <select class="form-control" name="type">
+              <option value="Waiter">Waiter</option>
+              <option value="Manager">Manager</option>
+              <option value="Chef">Chef</option>
+              <option value="Cleaner">Cleaner</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="email" class="text-center"> <b>Email :</b> </label>
             <input type="email" class="form-control" placeholder="Example: mail@gmail.com" name="email">
           </div>

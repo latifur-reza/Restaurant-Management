@@ -10,6 +10,7 @@
         <tr>
           <th>Sl No.</th>
           <th>Name</th>
+          <th>Type</th>
           <th>Email</th>
           <th>Phone</th>
           <th>Salary</th>
@@ -25,6 +26,7 @@
           <tr>
             <td>{{$count++}}</td>
             <td>{{$item->name}}</td>
+            <td>{{$item->type}}</td>
             <td>{{$item->email}}</td>
             <td>{{$item->phone}}</td>
             <td>{{$item->salary}}</td>

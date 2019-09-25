@@ -14,6 +14,16 @@
             <input type="text" class="form-control" placeholder="{{$staff->name}}" name="name" value="{{$staff->name}}" autofocus required>
           </div>
           <div class="form-group">
+            <label for="type" class="text-center"> <b>Type : </b><span style="color: red">*</span></label>
+            <select class="form-control" name="type">
+              <option value="Waiter" @if ($staff->type == "Waiter") selected @endif>Waiter</option>
+              <option value="Manager" @if ($staff->type == "Manager") selected @endif>Manager</option>
+              <option value="Chef" @if ($staff->type == "Chef") selected @endif>Chef</option>
+              <option value="Cleaner" @if ($staff->type == "Cleaner") selected @endif>Cleaner</option>
+              <option value="Other" @if ($staff->type == "Other") selected @endif>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="email" class="text-center"> <b>Email :</b> </label>
             <input type="email" class="form-control" placeholder="{{$staff->email}}" value="{{$staff->email}}" name="email">
           </div>
