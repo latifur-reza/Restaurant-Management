@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Customer;
 use App\Models\Menu;
 use App\Models\Category;
+use App\Models\Staff;
 use App\Models\ServedCustomer;
 use App\Models\ServedMenu;
 use App\Models\ServedDetails;
@@ -34,17 +35,21 @@ class ServeController extends Controller
     {
         $id = 0;
         $customer = Customer::where('id',$id)->get();
+        $allcustomer = Customer::where('status',"Active")->get();
         $category = Category::orderBy('categoryname','asc')->where('status','Active')->get();
+        $waiters = Staff::orderBy('name','asc')->where('status','Active')->where('type','Waiter')->get();
         $menu = Menu::orderBy('categoryname','asc')->orderBy('food','asc')->where('status','Active')->get(['id','categoryname','food','price','discountcash','discountpercent','status']);
-        return view('pages.serve.serve')->with('category',$category)->with('menu',$menu)->with('customer',$customer);
+        return view('pages.serve.serve')->with('category',$category)->with('menu',$menu)->with('customer',$customer)->with('allcustomer',$allcustomer)->with('waiters',$waiters);
     }
 
     public function createcus($id)
     {
         $customer = Customer::where('id',$id)->get();
+        $allcustomer = Customer::where('status',"Active")->get();
         $category = Category::orderBy('categoryname','asc')->where('status','Active')->get();
+        $waiters = Staff::orderBy('name','asc')->where('status','Active')->where('type','Waiter')->get();
         $menu = Menu::orderBy('categoryname','asc')->orderBy('food','asc')->where('status','Active')->get(['id','categoryname','food','price','discountcash','discountpercent','status']);
-        return view('pages.serve.serve')->with('category',$category)->with('menu',$menu)->with('customer',$customer);
+        return view('pages.serve.serve')->with('category',$category)->with('menu',$menu)->with('customer',$customer)->with('allcustomer',$allcustomer)->with('waiters',$waiters);
     }
 
     /**
@@ -71,6 +76,10 @@ class ServeController extends Controller
         $servedCustomer->phone = $request->phone;
         $servedCustomer->email = $request->email;
         $servedCustomer->barcode = $request->barcode;
+        $servedCustomer->noofguest = $request->noofguest;
+        if (is_null($servedCustomer->noofguest)) {
+          $servedCustomer->noofguest = 0;
+        }
         $servedCustomer->tableno = $request->tableno;
         if (is_null($servedCustomer->tableno)) {
           $servedCustomer->tableno = 0;
@@ -88,6 +97,7 @@ class ServeController extends Controller
 
         $servedDetails->orderno = $orderno;
         $servedDetails->invoiceno = $invoiceno;
+        $servedDetails->waiter = $request->waiter;
         $servedDetails->total = $request->total;
         $servedDetails->discounttotalpercent = $request->discounttotalpercent;
         if (is_null($servedDetails->discounttotalpercent)) {

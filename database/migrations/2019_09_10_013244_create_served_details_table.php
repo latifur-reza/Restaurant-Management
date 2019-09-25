@@ -17,6 +17,7 @@ class CreateServedDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->string('orderno');
             $table->string('invoiceno');
+            $table->string('waiter')->nullable();
             $table->integer('total')->default(0);
             $table->integer('discounttotalpercent')->default(0);
             $table->integer('discounttotalcash')->default(0);

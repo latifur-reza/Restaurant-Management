@@ -22,6 +22,7 @@ class CreateServedCustomersTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('barcode')->nullable();
+            $table->string('noofguest')->nullable();
             $table->string('tableno')->nullable();
             $table->string('status');
             $table->string('paymentstatus');

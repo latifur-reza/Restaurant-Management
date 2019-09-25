@@ -59,21 +59,53 @@
                     <div class="col-md-6 col-sm-6">
                         <ol class="list-group text-center" style="list-style: none">
                           <h3 class="text-center">Calculation</h3>
+
                           <li class="list-group-item list-group-item-success">
+                              <div class="" id="selectedcustomer">
+                                  @php
+                                      $printcustomer = "None";
+                                  @endphp
+                                  @foreach ($customer as $c)
+                                      @php
+                                          $printcustomer = $c->name;
+                                      @endphp
+                                      <input type="hidden" name="id" value="{{$c->id}}">
+                                      <input type="hidden" name="name" value="{{$c->name}}">
+                                      <input type="hidden" name="email" value="{{$c->email}}">
+                                      <input type="hidden" name="phone" value="{{$c->phone}}">
+                                      <input type="hidden" name="barcode" value="{{$c->barcode}}">
+                                  @endforeach
+                              </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    Table No : <input type="text" class="form-control" name="tableno" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                    Waiter :
+                                    <select class="form-control" name="waiter">
+                                        <option value="None">None</option>
+                                        @foreach ($waiters as $waiter)
+                                            <option value="{{$waiter->name}}">{{$waiter->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    Table No : <input type="text" class="form-control" name="tableno" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" />
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    No of Guests : <input type="text" class="form-control" name="noofguest" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" />
                                 </div>
                                 <div class="col-sm-6" id="total">
-                                    Total : <input type="text" class="form-control" name="total" value="0" readonly>
+                                    Sub Total : <input type="text" class="form-control" name="total" value="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
-                                  Discount(%) : <input type="text" class="form-control" name="discounttotalpercent" onkeyup="calculateDiscount()" id="percentDiscountId" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                  Discount(%) : <input type="text" class="form-control" name="discounttotalpercent" onkeyup="calculateDiscount()" id="percentDiscountId" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" />
                               </div>
                               <div class="col-sm-6">
-                                  Discount($) : <input type="text" class="form-control" name="discounttotalcash" onkeyup="calculateDiscount()" id="cashDiscountId" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                  Discount($) : <input type="text" class="form-control" name="discounttotalcash" onkeyup="calculateDiscount()" id="cashDiscountId" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" />
                               </div>
 
                             </div>
@@ -107,14 +139,64 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
-
+                                <div class="col-sm-6" id="customernameonly">
+                                    Customer : <input type="text" style="cursor: pointer" class="form-control" name="customers" value="{{$printcustomer}}" data-toggle="modal" data-target="#customersall" readonly>
                                 </div>
                                 <div class="col-sm-6" id="grandtotal">
                                     Grand Total : <input type="text" class="form-control" name="grandtotal" value="0" readonly>
                                 </div>
                             </div>
                           </li>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="customersall" tabindex="-1" role="dialog" aria-labelledby="catTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document" style="max-width: 1000px">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="catTitle">All Customers</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid table-responsive">
+                                        <table class="table" id="mydatatable3">
+                                          <thead>
+                                            <tr>
+                                              <th>Sl No.</th>
+                                              <th>Name</th>
+                                              <th>Email</th>
+                                              <th>Phone</th>
+                                              <th>Barcode</th>
+                                              <th>Actions</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            @php
+                                              $counting = 1;
+                                            @endphp
+                                            @foreach ($allcustomer as $onecustomer)
+                                              <tr>
+                                                <td>{{$counting++}}</td>
+                                                <td>{{$onecustomer->name}}</td>
+                                                <td>{{$onecustomer->email}}</td>
+                                                <td>{{$onecustomer->phone}}</td>
+                                                <td>{{$onecustomer->barcode}}</td>
+                                                <td>
+                                                  <button type="button" value="serve" class="btn btn-info" data-dismiss="modal" onClick="selCustomer({{$onecustomer->id}})">Serve</button>
+                                                </td>
+                                              </tr>
+                                            @endforeach
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
                           <li class="list-group-item list-group-item-success">
                             <div class="row">
@@ -134,7 +216,7 @@
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
-                                  Transaction No : <input type="text" class="form-control" name="transactionno" value="" />
+                                  Transaction No : <input type="text" class="form-control" name="transactionno" value="" autocomplete="off" />
                               </div>
                               <div class="col-sm-6" id="changeAmount">
                                   Change : <input type="text" class="form-control" name="change" value="0" readonly>
@@ -142,14 +224,6 @@
                               </div>
 
                             </div>
-                            @foreach ($customer as $c)
-                                <input type="hidden" name="id" value="{{$c->id}}">
-                                <input type="hidden" name="name" value="{{$c->name}}">
-                                <input type="hidden" name="email" value="{{$c->email}}">
-                                <input type="hidden" name="phone" value="{{$c->phone}}">
-                                <input type="hidden" name="barcode" value="{{$c->barcode}}">
-
-                            @endforeach
                           </li>
 
                         </ol>
@@ -172,6 +246,7 @@
         var menuCodeArray = [];
         var itemall = {!! json_encode($menu->toArray()) !!};
         var settings = {!! json_encode($settings->toArray()) !!};
+        var allcustomer = {!! json_encode($allcustomer->toArray()) !!};
 
         for (var k = 0; k < itemall.length; k++) {
             itemall[k].quantity = 1;
@@ -353,6 +428,26 @@
                 btn = "";
             }
             document.getElementById("submitbtn").innerHTML = btn;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function selCustomer(cusId){
+            var cusDet = "";
+            var nameOnly = "";
+            for (var i = 0; i < allcustomer.length; i++) {
+                if (allcustomer[i].id == cusId) {
+                    nameOnly = 'Customer : <input type="text" style="cursor: pointer" class="form-control" name="customers" value="'+allcustomer[i].name+'" data-toggle="modal" data-target="#customersall" readonly>';
+                    cusDet += '<input type="hidden" name="id" value="'+allcustomer[i].id+'">\
+                    <input type="hidden" name="name" value="'+allcustomer[i].name+'">\
+                    <input type="hidden" name="email" value="'+allcustomer[i].email+'">\
+                    <input type="hidden" name="phone" value="'+allcustomer[i].phone+'">\
+                    <input type="hidden" name="barcode" value="'+allcustomer[i].barcode+'">'
+                }
+            }
+            document.getElementById("selectedcustomer").innerHTML = cusDet;
+
+            document.getElementById("customernameonly").innerHTML = nameOnly;
         }
     </script>
 
