@@ -16,6 +16,9 @@ Route::middleware(['auth' , 'manager'])->group(function () {
     Route::get('/', 'PagesController@index')->name('index');
     Route::get('/home', 'PagesController@index')->name('index');
 
+    //invoice routes
+    Route::get('/invoice/{invono}', 'InvoiceController@index')->name('invoice');
+
     //serve routes
     Route::get('/serve', 'ServeController@create')->name('servenow');
     Route::get('/serve/{id}', 'ServeController@createcus')->name('servenowcus');
