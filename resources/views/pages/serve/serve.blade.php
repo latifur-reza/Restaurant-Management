@@ -130,14 +130,16 @@
                                         @endphp
                                     @endif
                                 @endforeach
-                                <div class="col-sm-6">
-                                    <input type="hidden" name="paymentchecktype" value="{{$paymentC}}">
-                                    VAT(%) : <input type="text" class="form-control" name="vat" value="{{$vatC}}" readonly>
+                                <div class="col-sm-6" id="vatamountcalc">
+                                    VAT({{$vatC}}%) : <input type="text" class="form-control" name="vatamount" value="0" readonly>
                                 </div>
-                                <div class="col-sm-6">
-                                    Service Charge(%) : <input type="text" class="form-control" name="servicecharge" value="{{$serviceC}}" readonly>
+                                <div class="col-sm-6" id="servicechargeamountcalc">
+                                    Service({{$serviceC}}%) : <input type="text" class="form-control" name="servicechargeamount" value="0" readonly>
                                 </div>
                             </div>
+                            <input type="hidden" name="paymentchecktype" value="{{$paymentC}}">
+                            <input type="hidden" name="vat" value="{{$vatC}}">
+                            <input type="hidden" name="servicecharge" value="{{$serviceC}}">
                             <div class="row">
                                 <div class="col-sm-6" id="customernameonly">
                                     Customer : <input type="text" style="cursor: pointer" class="form-control" name="customers" value="{{$printcustomer}}" data-toggle="modal" data-target="#customersall" readonly>
@@ -394,10 +396,20 @@
                 }
             }
             var final;
+            var vatamount;
+            var servicechargeamount;
             final = finalTotal - disCash;
             final = final - (final*disPer)/100;
-            final = final + (final*vat)/100 + (final*servicecharge)/100;
-            final = Math.round(final*1000)/1000;
+            vatamount = (final*vat)/100;
+            servicechargeamount = (final*servicecharge)/100;
+            final = final + vatamount + servicechargeamount;
+            final = Math.floor(final);
+            var vatamountbox;
+            var servicechargeamountbox;
+            vatamountbox = 'VAT('+vat+'%) : <input type="text" class="form-control" name="vatamount" value="'+vatamount+'" readonly>'
+            servicechargeamountbox = 'Service('+servicecharge+'%) : <input type="text" class="form-control" name="servicechargeamount" value="'+servicechargeamount+'" readonly>'
+            document.getElementById("vatamountcalc").innerHTML = vatamountbox;
+            document.getElementById("servicechargeamountcalc").innerHTML = servicechargeamountbox;
             var grandTotalBox;
             grandTotalBox = 'Grand Total : <input type="text" class="form-control" name="grandtotal" value="'+final+'" readonly>';
             document.getElementById("grandtotal").innerHTML = grandTotalBox;
