@@ -144,9 +144,11 @@ class ServeController extends Controller
 
         if ($request->paymentchecktype == "Pay Last") {
             session()->flash('success','Items are served to customer!!');
+            session()->flash('invoicenonow',$invoiceno);
             return back();
         }else {
             session()->flash('success','Items are added to kitchen!!');
+            session()->flash('invoicenonow',$invoiceno);
             return redirect()->route('inkitchen');
         }
 

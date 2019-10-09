@@ -463,4 +463,18 @@
         }
     </script>
 
+    @if (Session::has('invoicenonow'))
+        @php
+            $invonow = Session::get('invoicenonow');
+        @endphp
+
+        <script type="text/javascript">
+            var invonow = @php echo json_encode($invonow);@endphp;
+            if (invonow != "") {
+                var url = "invoice/"+invonow;
+                window.open(url);
+            }
+        </script>
+    @endif
+
 @endsection

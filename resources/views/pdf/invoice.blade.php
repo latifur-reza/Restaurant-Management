@@ -245,3 +245,13 @@
 @endphp
 <br>
 <small>Printed at {{$now}}</small>
+<script type="text/javascript">
+    try {
+        this.print();
+    } catch (e) {
+        window.onload = window.print();
+    }
+    window.onload = function(){
+        alert("ghg");
+    };
+</script>
