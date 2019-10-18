@@ -13,8 +13,8 @@
 
 Route::middleware(['auth' , 'manager'])->group(function () {
 
-    Route::get('/', 'PagesController@index')->name('index');
-    Route::get('/home', 'PagesController@index')->name('index');
+    Route::get('/', 'DashboardController@index')->name('index');
+    Route::get('/home', 'DashboardController@index')->name('index');
 
     //invoice routes
     Route::get('/customerinvoicelist', 'AccountsController@index')->name('invoicelist');

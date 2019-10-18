@@ -314,14 +314,14 @@
               </ul>
             </div>
           </li>
-
+          {{--
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="menu-icon fa fa-gitlab"></i>
               <span class="menu-title">Reports</span>
             </a>
           </li>
-
+          --}}
           <li class="nav-item">
             <a class="nav-link" href="{!! route('appsettings') !!}">
               <i class="menu-icon fa fa-optin-monster"></i>
