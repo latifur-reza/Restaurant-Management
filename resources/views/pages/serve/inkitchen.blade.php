@@ -24,6 +24,7 @@
             <td>{{$item->invoiceno}}</td>
             <td>{{$item->orderno}}</td>
             <td>
+                <a href="{{ route('invoice',$item->invoiceno) }}" target="_blank"><button type="button" value="edit" class="btn btn-info"><i class="fa fa-print"></i></button></a>
                 <a href="#serve{{$item->invoiceno}}" data-toggle="modal"><button type="button" value="serve" class="btn btn-success">Serve</button></a>
                 <!-- Modal -->
                 <div class="modal fade" id="serve{{$item->invoiceno}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,5 +100,5 @@
           }
       </script>
   @endif
-  
+
 @endsection

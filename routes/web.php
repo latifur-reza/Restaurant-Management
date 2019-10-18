@@ -17,6 +17,8 @@ Route::middleware(['auth' , 'manager'])->group(function () {
     Route::get('/home', 'PagesController@index')->name('index');
 
     //invoice routes
+    Route::get('/customerinvoicelist', 'AccountsController@index')->name('invoicelist');
+    Route::get('/reservationinvoicelist', 'AccountsController@reservation')->name('reservationinvoicelist');
     Route::get('/invoice/{invono}', 'InvoiceController@index')->name('invoice');
     Route::get('/reservedinvoice/{invono}', 'InvoiceController@reservation')->name('reservedinvoice');
     Route::get('/reserveservedinvoice/{invono}', 'InvoiceController@reservationserved')->name('reserveservedinvoice');

@@ -291,7 +291,7 @@
                       <a class="nav-link" href="{!! route('reservationarc') !!}">Reservation Archive</a>
                     </li>
                 @endif
-                
+
               </ul>
             </div>
           </li>
@@ -305,19 +305,10 @@
             <div class="collapse" id="Accounts">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Customer Invoices</a>
+                  <a class="nav-link" href="{!! route('invoicelist') !!}">Customer Invoices</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Reservation Invoices</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">Staffs Salary Invoices</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">Daily Expenses</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">Fixed Costs</a>
+                  <a class="nav-link" href="{!! route('reservationinvoicelist') !!}">Reservation Invoices</a>
                 </li>
 
               </ul>

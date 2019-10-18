@@ -36,6 +36,7 @@
             <td>{{$item->status}}</td>
             <td>{{$item->created_at}}</td>
             <td>
+              <a href="{{ route('reserveservedinvoice',$item->invoiceno) }}" target="_blank"><button type="button" value="edit" class="btn btn-primary"><i class="fa fa-print"></i></button></a>
               <a href="{{ route('editreservation',$item->invoiceno) }}"><button type="button" value="edit" class="btn btn-info"><i class="fa fa-edit"></i></button></a>
               <a href="#confirm{{$item->invoiceno}}" data-toggle="modal"><button type="button" value="confirm" class="btn btn-success"><i class="fa fa-check"></i></button></a>
               <a href="#cancel{{$item->invoiceno}}" data-toggle="modal"><button type="button" value="cancel" class="btn btn-warning"><i class="fa fa-remove"></i></button></a>
