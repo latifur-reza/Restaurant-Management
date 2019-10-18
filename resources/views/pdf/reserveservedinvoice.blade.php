@@ -65,6 +65,15 @@
 @endforeach
 
 @php
+    $advancepaid = 0;
+@endphp
+@foreach ($advance as $a)
+    @php
+        $advancepaid = $a->receivedcash;
+    @endphp
+@endforeach
+
+@php
     $orderno = 0;
     $waiter = "";
     $total = 0;
@@ -214,7 +223,13 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="text-align: right">Grand Total : </td>
+            <td colspan="4" style="text-align: right">Advance : </td>
+            <td style="border-top: 1px dotted black">
+                {{$advancepaid}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: right">Payable : </td>
             <td style="border-top: 1px dotted black">
                 {{$grandtotal}}
             </td>

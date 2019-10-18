@@ -281,18 +281,17 @@
             <div class="collapse" id="reservation">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Reserve Now</a>
+                  <a class="nav-link" href="{!! route('newreservation') !!}">Reserve Now</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./">Reserve List</a>
+                  <a class="nav-link" href="{!! route('reservationlist') !!}">Reserve List</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">Reservation Served</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./">Reservation Archive</a>
-                </li>
-
+                @if (Auth::user()->permission == "Admin")
+                    <li class="nav-item">
+                      <a class="nav-link" href="{!! route('reservationarc') !!}">Reservation Archive</a>
+                    </li>
+                @endif
+                
               </ul>
             </div>
           </li>

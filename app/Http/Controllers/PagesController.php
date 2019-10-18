@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use Auth;
 use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -13,7 +15,11 @@ class PagesController extends Controller
     }
 
     public function nopermit(){
-      return view('auth.nopermit');
+        if (Auth::check()){
+            return redirect()->route('index');
+        }else{
+            return view('auth.nopermit');
+        }
     }
 
 }

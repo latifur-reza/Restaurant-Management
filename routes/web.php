@@ -18,6 +18,8 @@ Route::middleware(['auth' , 'manager'])->group(function () {
 
     //invoice routes
     Route::get('/invoice/{invono}', 'InvoiceController@index')->name('invoice');
+    Route::get('/reservedinvoice/{invono}', 'InvoiceController@reservation')->name('reservedinvoice');
+    Route::get('/reserveservedinvoice/{invono}', 'InvoiceController@reservationserved')->name('reserveservedinvoice');
 
     //serve routes
     Route::get('/serve', 'ServeController@create')->name('servenow');
@@ -107,6 +109,16 @@ Route::middleware(['auth' , 'manager'])->group(function () {
     Route::get('/changepassword', 'ProfileSettingsController@changepasswordview')->name('changepassword');
     Route::post('/changepassword', 'ProfileSettingsController@changepassword')->name('changepasswordstore');
 
+    //reservation routes
+    Route::get('/newreservation', 'ReservationController@create')->name('newreservation');
+    Route::post('/newreservation', 'ReservationController@store')->name('newreservation.store');
+    Route::get('/editreservation/{invoiceno}', 'ReservationController@edit')->name('editreservation');
+    Route::post('/editreservation/{invoiceno}', 'ReservationController@update')->name('editreservation.update');
+    Route::get('/reservationlist', 'ReservationController@index')->name('reservationlist');
+    Route::post('/reservationdelete/{invoiceno}', 'ReservationController@delete')->name('reservationdelete');
+    Route::post('/reservationcancel/{invoiceno}', 'ReservationController@cancel')->name('reservationcancel');
+    Route::post('/reservationconfirm/{invoiceno}', 'ReservationController@confirm')->name('reservationconfirm');
+
 
     Route::middleware(['admin'])->group(function () {
 
@@ -168,6 +180,11 @@ Route::middleware(['auth' , 'manager'])->group(function () {
         Route::get('/fixedcostsexpensesarc', 'FixedCostsExpensesController@indexarc')->name('fixedcostsexpensesarc');
         Route::post('/fixedcostsexpensesdestroy/{id}', 'FixedCostsExpensesController@destroy')->name('fixedcostsexpensesdestroy');
         Route::post('/fixedcostsexpensesactive/{id}', 'FixedCostsExpensesController@active')->name('fixedcostsexpensesactive');
+
+        //reservation routes
+        Route::get('/reservationarc', 'ReservationController@indexarc')->name('reservationarc');
+        Route::post('/reservationdestroy/{invoiceno}', 'ReservationController@destroy')->name('reservationdestroy');
+        Route::post('/reservationactive/{invoiceno}', 'ReservationController@active')->name('reservationactive');
 
         //app settings routes
         Route::get('/appsettings', 'AppSettingsController@index')->name('appsettings');

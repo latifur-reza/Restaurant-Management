@@ -6,6 +6,9 @@ use PDF;
 use App\Models\ServedCustomer;
 use App\Models\ServedMenu;
 use App\Models\ServedDetails;
+use App\Models\ReservedCustomer;
+use App\Models\ReservedMenu;
+use App\Models\ReservedDetails;
 
 use Illuminate\Http\Request;
 
@@ -27,6 +30,44 @@ class InvoiceController extends Controller
         $customPaper = array(0,0,227,$height);
         $pdf = PDF::loadView('pdf.invoice',$data)->setPaper($customPaper);
         return $pdf->stream('invoice.pdf');
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reservation($invoiceno)
+    {
+        $servedCustomer = ReservedCustomer::where('invoiceno',$invoiceno)->where('status','Reserved')->orWhere('status','Confirmed')->get();
+        $servedDetails = ReservedDetails::where('invoiceno',$invoiceno)->where('status','Reserved')->orWhere('status','Confirmed')->get();
+        $servedMenu = ReservedMenu::where('invoiceno',$invoiceno)->where('status','Reserved')->orWhere('status','Confirmed')->get();
+        $data = ['customer' => $servedCustomer, 'details' => $servedDetails, 'menu' => $servedMenu];
+        $adjust = $servedMenu->count() * 20;
+        $height = 560 + $adjust;
+        $customPaper = array(0,0,227,$height);
+        $pdf = PDF::loadView('pdf.reservedinvoice',$data)->setPaper($customPaper);
+        return $pdf->stream('reservedinvoice.pdf');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reservationserved($invoiceno)
+    {
+        $servedCustomer = ReservedCustomer::where('invoiceno',$invoiceno)->where('status','Served')->get();
+        $advance = ReservedDetails::where('invoiceno',$invoiceno)->where('status','Served reserve')->get();
+        $servedDetails = ReservedDetails::where('invoiceno',$invoiceno)->where('status','Served')->get();
+        $servedMenu = ReservedMenu::where('invoiceno',$invoiceno)->where('status','Served')->get();
+        $data = ['customer' => $servedCustomer, 'advance' => $advance, 'details' => $servedDetails, 'menu' => $servedMenu];
+        $adjust = $servedMenu->count() * 20;
+        $height = 580 + $adjust;
+        $customPaper = array(0,0,227,$height);
+        $pdf = PDF::loadView('pdf.reserveservedinvoice',$data)->setPaper($customPaper);
+        return $pdf->stream('reserveservedinvoice.pdf');
     }
 
     /**

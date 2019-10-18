@@ -220,15 +220,15 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="text-align: right">Received Cash : </td>
+            <td colspan="4" style="text-align: right">Advance Cash : </td>
             <td>
                 {{$receivedcash}}
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="text-align: right"><span style="float: left">Pay type: {{$paytype}}</span>Change : </td>
+            <td colspan="4" style="text-align: right"><span style="float: left">Pay type: {{$paytype}}</span></td>
             <td>
-                {{$change}}
+                
             </td>
         </tr>
         <tr>
