@@ -69,7 +69,7 @@
     $waiter = "";
     $total = 0;
     $discountpercent = 0;
-    $discountcash = 0;
+    $discounttotalcash = 0;
     $vat = 0;
     $servicecharge = 0;
     $grandtotal = 0;
@@ -87,9 +87,9 @@
         if (is_null($discountpercent)) {
             $discountpercent = 0;
         }
-        $discountcash = $d->discountcash;
-        if (is_null($discountcash)) {
-            $discountcash = 0;
+        $discounttotalcash = $d->discounttotalcash;
+        if (is_null($discounttotalcash)) {
+            $discounttotalcash = 0;
         }
         $vat = $d->vat;
         if (is_null($vat)) {
@@ -109,7 +109,7 @@
 
 @php
     $discountpercentamount = ($total*$discountpercent)/100;
-    $totalafterdiscount = $total - $discountcash;
+    $totalafterdiscount = $total - $discounttotalcash;
     $totalafterdiscount = $totalafterdiscount - ($totalafterdiscount*$discountpercent)/100;
     $vatamount = ($totalafterdiscount*$vat)/100;
     $servicechargeamount = ($totalafterdiscount*$servicecharge)/100;
@@ -186,7 +186,7 @@
         <tr>
             <td colspan="4" style="text-align: right">Discount(cash) : </td>
             <td>
-                {{$discountcash}}
+                {{$discounttotalcash}}
             </td>
         </tr>
         <tr>
