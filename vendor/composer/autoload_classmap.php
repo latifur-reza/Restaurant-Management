@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\AccountsController' => $baseDir . '/app/Http/Controllers/AccountsController.php',
     'App\\Http\\Controllers\\AppSettingsController' => $baseDir . '/app/Http/Controllers/AppSettingsController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -21,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\CustomerController' => $baseDir . '/app/Http/Controllers/CustomerController.php',
     'App\\Http\\Controllers\\DailyExpensesCategoryController' => $baseDir . '/app/Http/Controllers/DailyExpensesCategoryController.php',
     'App\\Http\\Controllers\\DailyExpensesController' => $baseDir . '/app/Http/Controllers/DailyExpensesController.php',
+    'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\FixedCostsController' => $baseDir . '/app/Http/Controllers/FixedCostsController.php',
     'App\\Http\\Controllers\\FixedCostsExpensesController' => $baseDir . '/app/Http/Controllers/FixedCostsExpensesController.php',
     'App\\Http\\Controllers\\InvoiceController' => $baseDir . '/app/Http/Controllers/InvoiceController.php',
