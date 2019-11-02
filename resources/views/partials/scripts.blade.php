@@ -10,6 +10,11 @@
 <!-- Custom js for this page-->
 <script src="{{ asset('js/dashboard.js')}}"></script>
 
+<script src="{{ asset('vendors/moments/moment.min.js')}}"></script>
+<script src="{{ asset('vendors/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{ asset('vendors/daterangepicker/datetimepicker.js')}}"></script>
+<script src="{{ asset('vendors/highchart/highcharts.js')}}"></script>
+<script src="{{ asset('vendors/highchart/no-data-to-display.js')}}"></script>
 <script src="{{ asset('vendors/datatables/datatables.min.js')}}"></script>
 
 <script type="text/javascript">
