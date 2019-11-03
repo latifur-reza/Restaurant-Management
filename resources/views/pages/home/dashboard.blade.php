@@ -112,7 +112,7 @@
                 <i class="mdi mdi-square-inc-cash text-info icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="mb-0 text-right">Total Item Sell</p>
+                <p class="mb-0 text-right">Today's Total Item Sell</p>
                 <div class="fluid-container">
                   <h3 class="font-weight-medium text-right mb-0">
                       @php
@@ -123,7 +123,7 @@
                               $total = $total + $item->total;
                           @endphp
                       @endforeach
-                      {{$total."/-"}}
+                      {{$total}}
                   </h3>
                 </div>
               </div>
