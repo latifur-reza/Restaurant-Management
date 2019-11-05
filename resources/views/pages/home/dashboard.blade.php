@@ -7,12 +7,12 @@
         /*margin: 0;
         padding: 0;*/
         max-width: 2150px;
-        
+
     }
 
     .modal-content {
         height: auto;
-        min-height: 100%;
+        min-height: 80%;
         border-radius: 0;
     }
 
@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-            <div id="foodcount" name="foodcount" style="margin-top:10px;">
+            <div id="test" name="foodcount" style="margin-top:10px;">
 
             </div>
         </div>
@@ -335,8 +335,8 @@
               </div>
             </div>
             <p class="text-muted mt-3 mb-0">
-             
-              <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> 
+
+              <i class="mdi mdi-reload mr-1" aria-hidden="true"></i>
             </p>
           </div>
         </div>
@@ -344,25 +344,30 @@
     </div>
 
     <!-- Modal -->
-<div class="modal fade" id="moredetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Today's sold items</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="modal fade" id="moredetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Today's sold items</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div id="" name="todayfoodcount" style="margin-top:10px;">
+
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
-  </div>
-</div>
+
+    <script type="text/javascript">
+        var soldtodayitems = {!! json_encode($soldtodayitems->toArray()) !!};
+    </script>
 @endsection
 
 @push('js')

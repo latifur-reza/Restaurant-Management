@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ServedMenu;
 use DB;
+use App\Models\ServedCustomer;
+use App\Models\ServedMenu;
+use App\Models\ServedDetails;
+use App\Models\ReservedCustomer;
+use App\Models\ReservedMenu;
+use App\Models\ReservedDetails;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -29,6 +34,7 @@ class DashboardController extends Controller
         $soldtodayitems = DB::table('served_menus')->select('food', DB::raw('sum(quantity) as total'))->where('created_at','like',$date.'%')->groupBy('food')->orderBy('total', 'desc')->get();
         $soldthismonthitems = DB::table('served_menus')->select('food', DB::raw('sum(quantity) as total'))->where('created_at','like',$currentmonth.'%')->groupBy('food')->orderBy('total', 'desc')->get();
 
+        $soldtodayitems = DB::table('served_menus')->select('menucode','categoryname','food', DB::raw('sum(quantity) as total'))->groupBy('menucode')->orderBy('total', 'desc')->get();
         return view('pages.home.dashboard')->with('soldtodayamount',$soldtodayamount)->with('soldthismonthamount',$soldthismonthamount)->with('soldtodayitems',$soldtodayitems)->with('soldthismonthitems',$soldthismonthitems);
     }
 
