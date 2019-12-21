@@ -354,7 +354,7 @@
             </button>
           </div>
           <div class="modal-body">
-              <div id="" name="todayfoodcount" style="margin-top:10px;">
+              <div id="" name="todaysfoodcount" style="margin-top:10px;">
 
               </div>
           </div>

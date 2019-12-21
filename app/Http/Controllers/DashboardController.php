@@ -31,11 +31,21 @@ class DashboardController extends Controller
         $soldtodayamount = DB::table('served_details')->select('paytype', DB::raw('sum(grandtotal) as total'))->where('created_at','like',$date.'%')->groupBy('paytype')->get();
         $soldthismonthamount = DB::table('served_details')->select('paytype', DB::raw('sum(grandtotal) as total'))->where('created_at','like',$currentmonth.'%')->groupBy('paytype')->get();
 
-        $soldtodayitems = DB::table('served_menus')->select('food', DB::raw('sum(quantity) as total'))->where('created_at','like',$date.'%')->groupBy('food')->orderBy('total', 'desc')->get();
+        //$soldtodayitems = DB::table('served_menus')->select('food', DB::raw('sum(quantity) as total'))->where('created_at','like',$date.'%')->groupBy('food')->orderBy('total', 'desc')->get();
         $soldthismonthitems = DB::table('served_menus')->select('food', DB::raw('sum(quantity) as total'))->where('created_at','like',$currentmonth.'%')->groupBy('food')->orderBy('total', 'desc')->get();
 
         $soldtodayitems = DB::table('served_menus')->select('menucode','categoryname','food', DB::raw('sum(quantity) as total'))->groupBy('menucode')->orderBy('total', 'desc')->get();
         return view('pages.home.dashboard')->with('soldtodayamount',$soldtodayamount)->with('soldthismonthamount',$soldthismonthamount)->with('soldtodayitems',$soldtodayitems)->with('soldthismonthitems',$soldthismonthitems);
+    }
+
+    public function refresh(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+        $data = DB::table('served_menus')->select('menucode','categoryname','food', DB::raw('sum(quantity) as total'))->groupBy('menucode')->orderBy('total', 'desc')->where('created_at','>',$start)->where('created_at','<',$end)->get();
+        return response()->json([
+            'jsdata' => $data,
+        ]);
     }
 
     /**

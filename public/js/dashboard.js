@@ -1,3 +1,8 @@
+var todayschart = [];
+for (var i = 0; i < soldtodayitems.length; i++) {
+    todayschart.push([soldtodayitems[i].food,parseInt(soldtodayitems[i].total)]);
+}
+
 $(document).ready( function () {
     $('input[name="datetimes"]').daterangepicker({
         timePicker: false,
@@ -7,8 +12,37 @@ $(document).ready( function () {
           format: 'DD-M-YYYY'
         }
     });
-});
 
+    $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD-M-YYYY') + ' - ' + picker.endDate.format('DD-M-YYYY'));
+        var startedAt = picker.startDate.format('YYYY-M-DD');
+        var endedAt = (moment(picker.endDate.format('YYYY-M-DD'), "YYYY-M-DD").add(1, 'days')).format('YYYY-M-DD');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "http://127.0.0.1:8000/dashboardrefresh",
+            type: "post",
+            data: { start : startedAt, end : endedAt },
+            success: function (response) {
+                todayschart = [];
+                for (var i = 0; i < response.jsdata.length; i++) {
+                    todayschart.push([response.jsdata[i].food,parseInt(response.jsdata[i].total)]);
+                }
+                testChart();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    });
+
+      $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+          $(this).val('');
+      });
+
+});
 
 $(document).ready( function () {
     Highcharts.chart('foodcount', {
@@ -116,54 +150,51 @@ $(document).ready( function () {
 });
 
 $(document).ready( function () {
-    var todayschart = [];
-    for (var i = 0; i < soldtodayitems.length; i++) {
-        todayschart.push(["{ name: \'"+soldtodayitems[i].food+"\'", "y: "+soldtodayitems[i].total + ",}"]);
-    }
-    var check = [todayschart];
-     Highcharts.chart('test', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Today\'s Total Sold'
-        },
-        xAxis: {
-            type: 'category'
-        },
-        yAxis: {
-            title: {
-                text: 'Total Sold'
-            }
-
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.y:.0f}'
-                }
-            }
-        },
-
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> items sold<br/>'
-        },
-
-        credits: {
-          enabled: false
-        },
-        series: [
-            {
-                name: "Food Item",
-                colorByPoint: true,
-                data: check
-            }
-        ],
-    });
+     testChart();
 });
+
+function testChart(){
+    Highcharts.chart('test', {
+       chart: {
+           type: 'column'
+       },
+       title: {
+           text: 'Today\'s Total Sold'
+       },
+       xAxis: {
+           type: 'category'
+       },
+       yAxis: {
+           title: {
+               text: 'Total Sold'
+           }
+
+       },
+       legend: {
+           enabled: false
+       },
+       plotOptions: {
+           series: {
+               borderWidth: 0,
+               dataLabels: {
+                   enabled: true,
+                   format: '{point.y:.0f}'
+               }
+           }
+       },
+
+       tooltip: {
+           headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+           pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> items sold<br/>'
+       },
+
+       credits: {
+         enabled: false
+       },
+       series: [
+           {
+               data: todayschart
+           }
+       ],
+   });
+}

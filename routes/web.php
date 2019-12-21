@@ -198,3 +198,13 @@ Route::middleware(['auth' , 'manager'])->group(function () {
 
 Auth::routes();
 Route::get('/nopermit', 'PagesController@nopermit')->name('nopermit');
+
+//user request routes
+Route::get('/userinfo', 'UserRequestController@index')->name('userinfo');
+Route::post('/userinfo', 'UserRequestController@create')->name('userinfo.create');
+Route::get('/userrequest', 'UserRequestController@userrequest')->name('userrequest');
+Route::post('/userrequest', 'UserRequestController@store')->name('userrequest.store');
+//Route::get('/userrequestview', 'UserRequestController@userrequestview')->name('userrequestview');
+
+//ajax data
+Route::post('/dashboardrefresh', 'DashboardController@refresh')->name('dashboardrefresh');
